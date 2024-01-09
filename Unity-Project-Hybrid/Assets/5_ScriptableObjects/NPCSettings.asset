@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03fad4d22f9223f4fbc5dd03e295d04e, type: 3}
-  m_Name: AgentSettings
+  m_Name: NPCSettings
   m_EditorClassIdentifier: 
+  TotalAgentAmount: 10
   MinSpeed: 1
   MaxSpeed: 2
   Acceleration: 5
-  TotalAgentAmount: 10
-  EnemyPercentage: 0
+  MinIdleTime: 1
+  MaxIdleTime: 5
   MinDistanceFromPlayer: 10
   MaxDistanceFromPlayer: 30
+  EnemyPercentage: 10

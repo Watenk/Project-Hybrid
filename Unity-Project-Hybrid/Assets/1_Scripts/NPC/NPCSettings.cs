@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AgentSettings", menuName = "ScriptableObjects/AgentSettings")]
-public class AgentSettings : ScriptableObject
+[CreateAssetMenu(fileName = "NPCSettings", menuName = "ScriptableObjects/NPCSettings")]
+public class NPCSettings : ScriptableObject
 {
-    public static AgentSettings Instance { get; private set; }
+    public static NPCSettings Instance { get; private set; }
+
+    [Header("Amount")]
+    public int TotalAgentAmount;
 
     [Header("Speed")]
 
@@ -15,11 +18,8 @@ public class AgentSettings : ScriptableObject
     public float MaxSpeed;
     [Range(0.0f, 10.0f)]
     public float Acceleration;
-
-    [Header("Amount")]
-    public int TotalAgentAmount;
-    [Range(0.0f, 100.0f)]
-    public float EnemyPercentage;
+    public float MinIdleTime;
+    public float MaxIdleTime;
 
     [Header("Location")]
 
@@ -27,6 +27,12 @@ public class AgentSettings : ScriptableObject
     public float MinDistanceFromPlayer;
     [Range(0.0f, 50.0f)]
     public float MaxDistanceFromPlayer;
+
+    [Header("Enemy's")]
+
+    [Range(0.0f, 100.0f)]
+    public float EnemyPercentage;
+
 
     private void OnEnable(){
         Instance = this;

@@ -1323,6 +1323,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCPrefabs:
   - {fileID: 6023047147036141968, guid: 3b7e60abbb23192408f7492860aa71a1, type: 3}
+  EnemyPrefabs:
+  - {fileID: 6023047147036141968, guid: fba8bcc99ca24f14f8c72f8d36863a60, type: 3}
 --- !u!4 &1151699582
 Transform:
   m_ObjectHideFlags: 0
@@ -1460,7 +1462,7 @@ Transform:
   m_GameObject: {fileID: 1179472642}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.16019702, y: 3.574, z: 0.049}
+  m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1657,7 +1659,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
