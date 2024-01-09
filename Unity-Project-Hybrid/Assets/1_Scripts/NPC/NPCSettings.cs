@@ -5,10 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NPCSettings", menuName = "ScriptableObjects/NPCSettings")]
 public class NPCSettings : ScriptableObject
 {
-    public static NPCSettings Instance { get; private set; }
+    public static NPCSettings Instance { 
+        get{
+            if (instance == null){
+                instance = Resources.Load<NPCSettings>("NPCSettings");
+            }
 
-    [Header("Amount")]
-    public int TotalAgentAmount;
+            return instance;
+        }
+    }
+    private static NPCSettings instance;
 
     [Header("Speed")]
 
@@ -27,14 +33,4 @@ public class NPCSettings : ScriptableObject
     public float MinDistanceFromPlayer;
     [Range(0.0f, 50.0f)]
     public float MaxDistanceFromPlayer;
-
-    [Header("Enemy's")]
-
-    [Range(0.0f, 100.0f)]
-    public float EnemyPercentage;
-
-
-    private void OnEnable(){
-        Instance = this;
-    }
 }

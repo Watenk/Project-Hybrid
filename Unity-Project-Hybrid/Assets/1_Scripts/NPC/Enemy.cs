@@ -12,5 +12,7 @@ public class Enemy : NPC
             new EnemyAttackState()
         );
         fsm.SwitchState(typeof(EnemyIdleState));
+
+        Die();
     }
 }

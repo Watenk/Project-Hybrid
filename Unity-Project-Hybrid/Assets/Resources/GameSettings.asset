@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8a4044b90f0f0409bdcf64092d7f81, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  FireNPCPrefab: {fileID: 6023047147036141968, guid: 3b7e60abbb23192408f7492860aa71a1,
+    type: 3}
+  WaterNPCPrefab: {fileID: 6023047147036141968, guid: 211bbf5c564b2a0438574b91c4bec32e,
+    type: 3}
+  NatureNPCPrefab: {fileID: 6023047147036141968, guid: c35ca7657cfe09843a03895e0a6e0985,
+    type: 3}
+  waves:
+  - NPCAmount: 1
+    EnemyAmount: 1
+    NatureAmount: 1
+    FireAmount: 1
+    WaterAmount: 1
+  - NPCAmount: 5
+    EnemyAmount: 1
+    NatureAmount: 1
+    FireAmount: 1
+    WaterAmount: 1

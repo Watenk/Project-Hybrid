@@ -1302,6 +1302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1151699582}
   - component: {fileID: 1151699581}
+  - component: {fileID: 1151699583}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1321,10 +1322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9c133ff6bbb6d542b7aeb0308cff56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NPCPrefabs:
-  - {fileID: 6023047147036141968, guid: 3b7e60abbb23192408f7492860aa71a1, type: 3}
-  EnemyPrefabs:
-  - {fileID: 6023047147036141968, guid: fba8bcc99ca24f14f8c72f8d36863a60, type: 3}
 --- !u!4 &1151699582
 Transform:
   m_ObjectHideFlags: 0
@@ -1340,6 +1337,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1151699583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151699580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22e312df0ed51634e9e00583db2a4a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FireNPCPrefab: {fileID: 6023047147036141968, guid: 3b7e60abbb23192408f7492860aa71a1,
+    type: 3}
+  WaterNPCPrefab: {fileID: 6023047147036141968, guid: 211bbf5c564b2a0438574b91c4bec32e,
+    type: 3}
+  NatureNPCPrefab: {fileID: 6023047147036141968, guid: c35ca7657cfe09843a03895e0a6e0985,
+    type: 3}
+  waves:
+  - NPCAmount: 1
+    EnemyAmount: 1
+    NatureAmount: 1
+    FireAmount: 1
+    WaterAmount: 1
+  - NPCAmount: 2
+    EnemyAmount: 1
+    NatureAmount: 1
+    FireAmount: 1
+    WaterAmount: 1
 --- !u!1 &1179472642
 GameObject:
   m_ObjectHideFlags: 0

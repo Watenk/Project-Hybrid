@@ -4,39 +4,67 @@ using UnityEngine;
 
 public class NPCManager : MonoBehaviour
 {
-    public List<GameObject> NPCPrefabs = new List<GameObject>();
-    public List<GameObject> EnemyPrefabs = new List<GameObject>();
     public static NPCManager Instance { get; private set; }
 
     private List<NPC> npcs = new List<NPC>();
+    private List<Enemy> enemys = new List<Enemy>();
 
     public void Awake(){
         Instance = this;
     }
 
-    public void Start(){
-        InstanceNPCs();
-    }
+    public void AddNPC(GameObject currentPrefab, System.Type npcScript){
 
-    public NPC SpawnNPC(GameObject npcPrefab, Vector3 spawnPos){
-        
-        if (npcPrefab.GetComponent<NPC>() == null){
-            Debug.LogError(npcPrefab.name + " Doesn't contain NPC");
-            return default;
+        // Instantiate
+        Vector3 currentPos = GetRandomPosForNPC();
+        GameObject npcInstance = Instantiate(currentPrefab, currentPos, Quaternion.identity);
+
+        // Add script
+        npcInstance.AddComponent(npcScript);
+        NPC currentNPC = null;
+        if (npcInstance.GetComponent<Enemy>() != null){
+            currentNPC = npcInstance.GetComponent<Enemy>();
+            enemys.Add(npcInstance.GetComponent<Enemy>());
         }
+        else{
+            currentNPC = npcInstance.GetComponent<NPC>();
+            npcs.Add(npcInstance.GetComponent<NPC>());
+        }
+         
+        if (currentNPC == null) { Debug.LogError(npcInstance.name + " Doesn't contain NPC"); }
 
-        GameObject npcInstance = Instantiate(npcPrefab, spawnPos, Quaternion.identity);
-        NPC currentNPC = npcInstance.GetComponent<NPC>();
-        npcs.Add(currentNPC);
-        return currentNPC;
+        // Init NPC
+        currentNPC.Init();
+        currentNPC.Agent.speed = Random.Range(NPCSettings.Instance.MinSpeed, NPCSettings.Instance.MaxSpeed);
+        currentNPC.Agent.acceleration = NPCSettings.Instance.Acceleration;
     }
 
     public void RemoveNPC(NPC currentNPC){
-        npcs.Remove(currentNPC);
+
+        if (currentNPC.GetComponent<Enemy>() != null){
+            enemys.Remove(currentNPC.GetComponent<Enemy>());
+        }
+        else{
+            npcs.Remove(currentNPC);
+        }
+
         Destroy(currentNPC);
     }
 
-    public Vector3 GetRandomNPCPos(){
+    public void ClearAll(){
+        foreach (NPC currentNPC in npcs){
+            Destroy(currentNPC);
+        }
+        npcs.Clear();
+
+        foreach (Enemy currentEnemy in enemys){
+            Destroy(currentEnemy);
+        }
+        enemys.Clear();
+
+    }
+
+    public Vector3 GetRandomPosForNPC(){
         float randomAngle = Random.Range(0f, 2f * Mathf.PI);
         float randomDistance = Random.Range(NPCSettings.Instance.MinDistanceFromPlayer, NPCSettings.Instance.MaxDistanceFromPlayer);
         float x = randomDistance * Mathf.Cos(randomAngle);
@@ -45,34 +73,7 @@ public class NPCManager : MonoBehaviour
         return new Vector3(x, 1f, z);
     }
 
-    public void AddRandomNPC(GameObject currentPrefab){
-        Vector3 currentPos = GetRandomNPCPos();
-        NPC currentNPC = SpawnNPC(currentPrefab, currentPos);
-        currentNPC.Init();
-        currentNPC.Agent.speed = Random.Range(NPCSettings.Instance.MinSpeed, NPCSettings.Instance.MaxSpeed);
-        currentNPC.Agent.acceleration = NPCSettings.Instance.Acceleration;
-    }
-
-    private void InstanceNPCs(){
-        
-        for (int i = 0; i < NPCSettings.Instance.TotalAgentAmount; i++){
-            
-            if (Random.Range(0.0f, 100.0f) <= NPCSettings.Instance.EnemyPercentage){
-                AddRandomNPC(GetRandomEnemyPrefab());
-            }
-            else{
-                AddRandomNPC(GetRandomNPCPrefab());
-            }
-        }
-    }
-
-    private GameObject GetRandomNPCPrefab(){
-        int index = Random.Range(0, NPCPrefabs.Count - 1);
-        return NPCPrefabs[index];
-    }
-
-    private GameObject GetRandomEnemyPrefab(){
-        int index = Random.Range(0, EnemyPrefabs.Count - 1);
-        return EnemyPrefabs[index];
+    public int GetEnemyAmount(){
+        return enemys.Count;
     }
 }
