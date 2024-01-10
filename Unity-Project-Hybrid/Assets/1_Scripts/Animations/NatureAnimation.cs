@@ -19,12 +19,7 @@ public class NatureAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            PlayRisingAnimation();
-        }
-        if (Input.GetKeyDown(KeyCode.W)) {
-            PlayShootAnimation(Camera.main.transform);
-        }
+
     }
 
     public void PlayRisingAnimation() {
