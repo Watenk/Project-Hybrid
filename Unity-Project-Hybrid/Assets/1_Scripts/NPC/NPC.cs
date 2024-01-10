@@ -12,9 +12,11 @@ public class NPC : MonoBehaviour, IDamageable
 
     protected NPCFSM fsm;
 
-    public void Init(){
+    public void Init(int maxHealth){
         GameObject = this.gameObject;
         Agent = GetComponent<NavMeshAgent>();
+        MaxHealth = maxHealth;
+        Health = MaxHealth;
         
         InitFSM();
 

@@ -9,6 +9,8 @@ public class NPCSettings : ScriptableObject
         get{
             if (instance == null){
                 instance = Resources.Load<NPCSettings>("NPCSettings");
+
+                if (instance == null) {Debug.Log("NPCSettings couln't be loaded...");}
             }
 
             return instance;
@@ -27,10 +29,13 @@ public class NPCSettings : ScriptableObject
     public float MinIdleTime;
     public float MaxIdleTime;
 
-    [Header("Location")]
+    [Header("Walk Range")]
 
     [Range(0.0f, 50.0f)]
     public float MinDistanceFromPlayer;
     [Range(0.0f, 50.0f)]
     public float MaxDistanceFromPlayer;
+
+    [Header("Health")]
+    public int MaxHealth;
 }

@@ -34,7 +34,7 @@ public class NPCManager : MonoBehaviour
         if (currentNPC == null) { Debug.LogError(npcInstance.name + " Doesn't contain NPC"); }
 
         // Init NPC
-        currentNPC.Init();
+        currentNPC.Init(NPCSettings.Instance.MaxHealth);
         currentNPC.Agent.speed = Random.Range(NPCSettings.Instance.MinSpeed, NPCSettings.Instance.MaxSpeed);
         currentNPC.Agent.acceleration = NPCSettings.Instance.Acceleration;
     }

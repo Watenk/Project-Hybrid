@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameSettings", menuName = "ScriptableObjects/GameSettings")]
@@ -11,7 +10,7 @@ public class GameSettings : ScriptableObject
             if (instance == null){
                 instance = Resources.Load<GameSettings>("GameSettings");
 
-                if (instance == null) {Debug.Log("AHHH");}
+                if (instance == null) {Debug.Log("GameSettings couln't be loaded...");}
             }
 
             return instance;

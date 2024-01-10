@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2760477736208352216}
   - component: {fileID: 3748592673137920729}
   m_Layer: 0
-  m_Name: FireNPC
+  m_Name: TempNatureNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
