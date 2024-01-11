@@ -12,19 +12,6 @@ public class AnimationController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.A)) {
-            PlayDeathClip();
-        }
-        if (Input.GetKeyDown(KeyCode.S)) {
-            PlayAttackClip();
-        }
-        if (Input.GetKeyDown(KeyCode.D)) {
-            StartWalkingAnimation();
-        }
-    }
-
     public void PlayDeathClip() {
         animator.SetTrigger(deathTrigger);
     }
@@ -37,7 +24,7 @@ public class AnimationController : MonoBehaviour
         animator.SetTrigger(walkTrigger);
     }
 
-    public void PlayIdleAnimation(){
-        animator.StopPlayback();
+    public void StopWalkAnimation(){
+        animator.ResetTrigger(walkTrigger);
     }
 }

@@ -20,6 +20,6 @@ public class NPCWalkState : BaseState<NPC>
 
     public override void OnExit()
     {
-        blackboard.animator.PlayIdleAnimation();
+        blackboard.animator.StopWalkAnimation();
     }
 }

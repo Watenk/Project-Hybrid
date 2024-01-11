@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -5,37 +6,83 @@ using UnityEngine;
 
 public class AttackManager : MonoBehaviour
 {
+    public string ActiveElement = "None";
+    
+    private FSM<AttackManager> fsm;
+    private Dictionary<string, GameObject> elements = new Dictionary<string, GameObject>();
     private bool AttackActive;
-    private GameObject elementSelectorInstance;
-    private GameObject waterSelectorInstance;
+
 
     public void Start(){
         InputManager.Instance.OnRIndexTrigger += OnRIndexTrigger;
         InputManager.Instance.OnRIndexTriggerLoose += OnRIndexTriggerLoose;
-        HandTriggerDetector.Instance.OnWaterElementSelector += OnElementWaterSelector;
 
-        elementSelectorInstance = Instantiate(AttackSettings.Instance.ElementSelector, Vector3.zero, Quaternion.identity);
-        elementSelectorInstance.SetActive(false);
+        AddElement("Selector", AttackSettings.Instance.ElementSelector);
+        AddElement("Water", AttackSettings.Instance.WaterSelector);
+        AddElement("Nature", AttackSettings.Instance.NatureSelector);
+        AddElement("Fire", AttackSettings.Instance.FireSelector);
 
-        waterSelectorInstance = Instantiate(AttackSettings.Instance.WaterSelector, Vector3.zero, quaternion.identity);
-        waterSelectorInstance.SetActive(false);
+        fsm = new FSM<AttackManager>(this,
+            new ElementSelectionState()
+        );
+        fsm.SwitchState(typeof(ElementSelectionState));
     }
 
-    private void OnRIndexTrigger(){
-        
+    public void ActivateElement(string name){
+
+        if (ActiveElement == "None"){
+            elements.TryGetValue(name, out GameObject currentElement);
+            currentElement.SetActive(true);
+            SetObjectInFrontOfPlayer(currentElement);
+            ActiveElement = name;
+        }
+        else{
+            Debug.LogError("Tried to activate element: " + name + " While " + ActiveElement + " is still active");
+        }
     }
 
-    private void OnRIndexTriggerLoose(){
+    public void DeActivateElement(string name){
 
-    }
+        if (ActiveElement != "None"){
+            elements.TryGetValue(name, out GameObject currentElement);
+            currentElement.SetActive(false);
 
-    private void OnElementWaterSelector(){
-
+            if (name != "Selector"){
+                ActiveElement = "None";
+            }
+        }
+        else{
+            Debug.LogError("Tried to deactivate element: " + name + " while none are active");
+        }
     }
 
     private void SetObjectInFrontOfPlayer(GameObject currentObject){
         currentObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * AttackSettings.Instance.ElementSelectorDistanceFromCam;
         currentObject.transform.LookAt(Camera.main.transform);
         currentObject.transform.eulerAngles = new Vector3(0, currentObject.transform.eulerAngles.y, currentObject.transform.eulerAngles.z);
+    }
+
+    private void AddElement(string name, GameObject prefab){
+        GameObject instance = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        instance.SetActive(false);
+        elements.Add(name, instance);
+    }
+
+    private void OnRIndexTrigger(){
+        
+        if (!AttackActive){
+            AttackActive = true;
+
+            fsm.SwitchState(typeof(ElementSelectionState));
+        }
+    }
+
+    private void OnRIndexTriggerLoose(){
+
+        if (AttackActive){
+            AttackActive = false;
+
+            fsm.SwitchState(typeof(ElementIdleState));
+        }
     }
 }
