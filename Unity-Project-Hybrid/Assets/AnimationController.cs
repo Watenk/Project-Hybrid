@@ -7,14 +7,9 @@ public class AnimationController : MonoBehaviour
     public string deathTrigger, attackTrigger, walkTrigger;
 
     private Animator animator;
-    // Start is called before the first frame update
+
     void Start() {
         animator = GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update() {
-
     }
 
     public void PlayDeathClip() {
@@ -25,7 +20,11 @@ public class AnimationController : MonoBehaviour
         animator.SetTrigger(attackTrigger);
     }
 
-    public void StartWalkingAnimation() {
+    public void PlayWalkingAnimation() {
         animator.SetTrigger(walkTrigger);
+    }
+
+    public void PlayIdleAnimation(){
+        animator.StopPlayback();
     }
 }

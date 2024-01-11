@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCIdleState : BaseState
+public class NPCIdleState : BaseState<NPC>
 {
     private float timer;
 

@@ -9,14 +9,16 @@ public class NPC : MonoBehaviour, IDamageable
     public NavMeshAgent Agent { get; private set; }
     public int Health { get; private set; }
     public int MaxHealth { get; private set; }
+    public AnimationController animator;
 
-    protected NPCFSM fsm;
+    protected FSM<NPC> fsm;
 
     public void Init(int maxHealth){
         GameObject = this.gameObject;
-        Agent = GetComponent<NavMeshAgent>();
         MaxHealth = maxHealth;
         Health = MaxHealth;
+        Agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<AnimationController>();
         
         InitFSM();
 
@@ -24,7 +26,7 @@ public class NPC : MonoBehaviour, IDamageable
     }
 
     public virtual void InitFSM(){
-        fsm = new NPCFSM(this,
+        fsm = new FSM<NPC>(this,
             new NPCIdleState(),
             new NPCWalkState()
         );

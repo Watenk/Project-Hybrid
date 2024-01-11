@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyWalkState : BaseState
+public class EnemyWalkState : BaseState<NPC>
 {
 
 }
