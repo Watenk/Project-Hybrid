@@ -24,5 +24,6 @@ public class GameSettings : ScriptableObject
     public GameObject NatureNPCPrefab;
 
     [Header("Waves")]
+    [Tooltip("The game starts at the first wave and when all the enemy's in that wave are dead it proceeds to the next wave")]
     public List<Wave> waves = new List<Wave>();
 }

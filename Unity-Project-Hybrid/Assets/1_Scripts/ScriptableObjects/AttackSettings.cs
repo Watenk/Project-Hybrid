@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [CreateAssetMenu(fileName = "AttackSettings", menuName = "ScriptableObjects/AttackSettings")]
 public class AttackSettings : ScriptableObject
@@ -18,5 +19,16 @@ public class AttackSettings : ScriptableObject
     }
     private static AttackSettings instance;
 
-    //[Header("Cooldowns")]
+    [Header("Prefabs")]
+    public GameObject ElementSelector;
+    public GameObject FireSelector;
+    public GameObject NatureSelector;
+    public GameObject WaterSelector;
+
+    [Header("Position")]
+    public float ElementSelectorDistanceFromCam;
+
+    [Header("Cooldowns")]
+    public float AttackCooldown;
+    public float TriggerDelay;
 }
