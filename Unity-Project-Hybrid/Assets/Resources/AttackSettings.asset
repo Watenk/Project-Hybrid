@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ElementSelector: {fileID: 5766465000343669500, guid: d03538fd00fe7f24fb6c5cce0daee4e8,
     type: 3}
-  FireSelector: {fileID: 0}
-  NatureSelector: {fileID: 0}
-  WaterSelector: {fileID: 5766465000343669500, guid: b08a88b166bd2a14596530843471c4d8,
+  FireSelector: {fileID: 5766465000343669500, guid: b08a88b166bd2a14596530843471c4d8,
+    type: 3}
+  NatureSelector: {fileID: 5766465000343669500, guid: 084ff8cfce183a746adb9266349c8ab5,
+    type: 3}
+  WaterSelector: {fileID: 1620885994612986769, guid: 57dca2610a1fdaf44a39acbfe3ea8ddc,
     type: 3}
   ElementSelectorDistanceFromCam: 0.5
   AttackCooldown: 1

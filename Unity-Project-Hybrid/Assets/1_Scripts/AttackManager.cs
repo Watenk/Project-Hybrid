@@ -23,22 +23,20 @@ public class AttackManager : MonoBehaviour
         AddElement("Fire", AttackSettings.Instance.FireSelector);
 
         fsm = new FSM<AttackManager>(this,
-            new ElementSelectionState()
+            new ElementIdleState(),
+            new ElementSelectionState(),
+            new ElementChargeState(),
+            new ElementShootState()
         );
-        fsm.SwitchState(typeof(ElementSelectionState));
+        fsm.SwitchState(typeof(ElementIdleState));
     }
 
     public void ActivateElement(string name){
 
-        if (ActiveElement == "None"){
-            elements.TryGetValue(name, out GameObject currentElement);
-            currentElement.SetActive(true);
-            SetObjectInFrontOfPlayer(currentElement);
-            ActiveElement = name;
-        }
-        else{
-            Debug.LogError("Tried to activate element: " + name + " While " + ActiveElement + " is still active");
-        }
+        elements.TryGetValue(name, out GameObject currentElement);
+        currentElement.SetActive(true);
+        SetObjectInFrontOfPlayer(currentElement);
+        ActiveElement = name;
     }
 
     public void DeActivateElement(string name){
@@ -79,10 +77,10 @@ public class AttackManager : MonoBehaviour
 
     private void OnRIndexTriggerLoose(){
 
-        if (AttackActive){
-            AttackActive = false;
+        // if (AttackActive){
+        //     AttackActive = false;
 
-            fsm.SwitchState(typeof(ElementIdleState));
-        }
+        //     fsm.SwitchState(typeof(ElementIdleState));
+        // }
     }
 }
