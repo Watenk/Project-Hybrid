@@ -29,14 +29,6 @@ public class NPCSettings : ScriptableObject
     public float MinIdleTime;
     public float MaxIdleTime;
 
-    [Header("Walk Range")]
-    [Tooltip("This is the distance from the player the NPC are allowed to walk / spawn in")]
-
-    [Range(0.0f, 50.0f)]
-    public float MinDistanceFromPlayer;
-    [Range(0.0f, 50.0f)]
-    public float MaxDistanceFromPlayer;
-
     [Header("Health")]
     public int MaxHealth;
 }

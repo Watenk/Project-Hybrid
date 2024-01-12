@@ -13,10 +13,10 @@ public class NPCManager : MonoBehaviour
         Instance = this;
     }
 
-    public void AddNPC(GameObject currentPrefab, System.Type npcScript){
+    public void AddNPC(GameObject currentPrefab, System.Type npcScript, Wave wave){
 
         // Instantiate
-        Vector3 currentPos = GetRandomPosForNPC();
+        Vector3 currentPos = GetRandomPosForNPC(wave);
         GameObject npcInstance = Instantiate(currentPrefab, currentPos, Quaternion.identity);
 
         // Add script
@@ -61,12 +61,11 @@ public class NPCManager : MonoBehaviour
             Destroy(currentEnemy);
         }
         enemys.Clear();
-
     }
 
-    public Vector3 GetRandomPosForNPC(){
+    public Vector3 GetRandomPosForNPC(Wave wave){
         float randomAngle = Random.Range(0f, 2f * Mathf.PI);
-        float randomDistance = Random.Range(NPCSettings.Instance.MinDistanceFromPlayer, NPCSettings.Instance.MaxDistanceFromPlayer);
+        float randomDistance = Random.Range(wave.MinDistanceFromPlayer, wave.MaxDistanceFromPlayer);
         float x = randomDistance * Mathf.Cos(randomAngle);
         float z = randomDistance * Mathf.Sin(randomAngle);
 

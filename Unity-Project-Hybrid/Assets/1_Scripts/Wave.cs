@@ -18,4 +18,10 @@ public class Wave
 
     [Range(0.0f, 1.0f)]
     public float WaterAmount;
+
+    [Range(0.0f, 50.0f)]
+    public float MinDistanceFromPlayer;
+
+    [Range(0.0f, 50.0f)]
+    public float MaxDistanceFromPlayer;
 }

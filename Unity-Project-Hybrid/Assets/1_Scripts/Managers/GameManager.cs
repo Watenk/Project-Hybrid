@@ -4,34 +4,41 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private int currentWave;
+    public static GameManager Instance { get; private set; }
+
+    private int currentWaveIndex;
+    private Wave currentWave;
+
+    public void Awake(){
+        Instance = this;
+    }
 
     public void Start(){
-        StartWave(currentWave);
+        StartWave(currentWaveIndex);
     }
 
     public void Update(){
         // Fix This
         if (CheckIfWaveIsDone()){
-            currentWave++;
+            currentWaveIndex++;
 
-            if (currentWave < GameSettings.Instance.waves.Count){
-                StartWave(currentWave);
+            if (currentWaveIndex < GameSettings.Instance.waves.Count){
+                StartWave(currentWaveIndex);
             }
         }
     }
 
     public void StartWave(int index){
         
-        Wave currentWave = GameSettings.Instance.waves[index];
+        currentWave = GameSettings.Instance.waves[index];
         NPCManager.Instance.ClearAll();
 
         for (int i = 0; i < currentWave.NPCAmount; i++){
-            NPCManager.Instance.AddNPC(GetNPCPrefab(currentWave), typeof(NPC));
+            NPCManager.Instance.AddNPC(GetNPCPrefab(currentWave), typeof(NPC), currentWave);
         }
 
         for (int i = 0; i < currentWave.EnemyAmount; i++){
-            NPCManager.Instance.AddNPC(GetNPCPrefab(currentWave), typeof(Enemy));
+            NPCManager.Instance.AddNPC(GetNPCPrefab(currentWave), typeof(Enemy), currentWave);
         }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
     }
 
@@ -41,6 +48,10 @@ public class GameManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public Wave GetCurrentWave(){
+        return currentWave;
     }
 
     private GameObject GetNPCPrefab(Wave currentWave){

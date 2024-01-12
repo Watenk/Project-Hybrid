@@ -6,7 +6,7 @@ public class NPCWalkState : BaseState<NPC>
 {
     public override void OnStart()
     {   
-        Vector3 newPos = NPCManager.Instance.GetRandomPosForNPC();
+        Vector3 newPos = NPCManager.Instance.GetRandomPosForNPC(GameManager.Instance.GetCurrentWave());
         blackboard.Agent.SetDestination(newPos);
         blackboard.animator.PlayWalkingAnimation();
     }
