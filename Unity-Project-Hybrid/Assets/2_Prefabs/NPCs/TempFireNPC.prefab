@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2760477736208352216}
   - component: {fileID: 3748592673137920729}
+  - component: {fileID: 173402463357473309}
   m_Layer: 0
   m_Name: TempFireNPC
   m_TagString: Untagged
@@ -55,6 +56,21 @@ NavMeshAgent:
   m_BaseOffset: 0.8
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &173402463357473309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023047147036141968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5feb01e199fc5419449c1c23290f71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathTrigger: Death
+  attackTrigger: Attack
+  walkTrigger: Walking
 --- !u!1 &9164250110559931127
 GameObject:
   m_ObjectHideFlags: 0

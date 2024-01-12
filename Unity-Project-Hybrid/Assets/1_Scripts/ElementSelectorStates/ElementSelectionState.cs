@@ -6,34 +6,34 @@ public class ElementSelectionState : BaseState<AttackManager>
 {
     public override void OnStart()
     {
-        HandTriggerDetector.Instance.OnWaterElementSelector += OnElementWaterSelector;
-        HandTriggerDetector.Instance.OnNatureElementSelector += OnElementNatureSelector;
-        HandTriggerDetector.Instance.OnFireElementSelector += OnElementFireSelector;
+        HandTriggerDetector.Instance.OnTrigger += OnTrigger;
 
-        blackboard.ActivateElement("Selector");
+        blackboard.ActivateElement(Selectors.ElementSelector);
     }
     
     public override void OnExit()
     {
-        HandTriggerDetector.Instance.OnWaterElementSelector += OnElementWaterSelector;
-        HandTriggerDetector.Instance.OnNatureElementSelector += OnElementNatureSelector;
-        HandTriggerDetector.Instance.OnFireElementSelector += OnElementFireSelector;
+        HandTriggerDetector.Instance.OnTrigger -= OnTrigger;
 
-        blackboard.DeActivateElement("Selector");
+        blackboard.DeActivateElement(Selectors.ElementSelector);
     }
 
-    private void OnElementWaterSelector(){
-        blackboard.ActiveElement = "Water";
-        fsm.SwitchState(typeof(ElementChargeState));
-    }
+    private void OnTrigger(Selectors trigger){
 
-    private void OnElementNatureSelector(){
-        blackboard.ActiveElement = "Nature";
-        fsm.SwitchState(typeof(ElementChargeState));
-    }
+        if (trigger == Selectors.WaterSelector){
+            blackboard.ActiveSelector = Selectors.WaterSelector;
+            fsm.SwitchState(typeof(ElementChargeState));
+        }
 
-    private void OnElementFireSelector(){
-        blackboard.ActiveElement = "Fire";
-        fsm.SwitchState(typeof(ElementChargeState));
+        if (trigger == Selectors.FireSelector){
+            blackboard.ActiveSelector = Selectors.FireSelector;
+            fsm.SwitchState(typeof(ElementChargeState));
+        }
+
+        if (trigger == Selectors.NatureSelector){
+            blackboard.ActiveSelector = Selectors.NatureSelector;
+            fsm.SwitchState(typeof(ElementChargeState));
+        }
+
     }
 }

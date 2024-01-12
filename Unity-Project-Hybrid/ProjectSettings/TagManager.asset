@@ -11,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Indicators
-  - WaterElementSelector
-  - NatureElementSelector
-  - FireElementSelector
+  - Spectator
+  - Trigger
+  - 
+  - 
   - 
   - 
   - 

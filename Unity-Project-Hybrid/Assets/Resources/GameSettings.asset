@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FireNPCPrefab: {fileID: 6023047147036141968, guid: 3b7e60abbb23192408f7492860aa71a1,
     type: 3}
-  WaterNPCPrefab: {fileID: 6023047147036141968, guid: 211bbf5c564b2a0438574b91c4bec32e,
+  WaterNPCPrefab: {fileID: 4535079281913910872, guid: 395e578a86174024c8a3452ecdce6555,
     type: 3}
   NatureNPCPrefab: {fileID: 769544554473199008, guid: a3959205adfa6254a86d98dd662a63b4,
     type: 3}
@@ -23,8 +23,8 @@ MonoBehaviour:
     EnemyAmount: 1
     NatureAmount: 1
     FireAmount: 0
-    WaterAmount: 0
-  - NPCAmount: 5
+    WaterAmount: 1
+  - NPCAmount: 2
     EnemyAmount: 1
     NatureAmount: 1
     FireAmount: 1

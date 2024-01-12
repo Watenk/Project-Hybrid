@@ -6,21 +6,19 @@ using UnityEngine;
 
 public class AttackManager : MonoBehaviour
 {
-    public string ActiveElement = "None";
+    public Selectors ActiveSelector = Selectors.None;
     
     private FSM<AttackManager> fsm;
-    private Dictionary<string, GameObject> elements = new Dictionary<string, GameObject>();
-    private bool AttackActive;
-
+    private Dictionary<Selectors, GameObject> selectors = new Dictionary<Selectors, GameObject>();
 
     public void Start(){
         InputManager.Instance.OnRIndexTrigger += OnRIndexTrigger;
         InputManager.Instance.OnRIndexTriggerLoose += OnRIndexTriggerLoose;
 
-        AddElement("Selector", AttackSettings.Instance.ElementSelector);
-        AddElement("Water", AttackSettings.Instance.WaterSelector);
-        AddElement("Nature", AttackSettings.Instance.NatureSelector);
-        AddElement("Fire", AttackSettings.Instance.FireSelector);
+        AddSelector(Selectors.ElementSelector, AttackSettings.Instance.ElementSelector);
+        AddSelector(Selectors.WaterSelector, AttackSettings.Instance.WaterSelector);
+        AddSelector(Selectors.NatureSelector, AttackSettings.Instance.NatureSelector);
+        AddSelector(Selectors.FireSelector, AttackSettings.Instance.FireSelector);
 
         fsm = new FSM<AttackManager>(this,
             new ElementIdleState(),
@@ -31,22 +29,22 @@ public class AttackManager : MonoBehaviour
         fsm.SwitchState(typeof(ElementIdleState));
     }
 
-    public void ActivateElement(string name){
+    public void ActivateElement(Selectors selector){
 
-        elements.TryGetValue(name, out GameObject currentElement);
+        selectors.TryGetValue(selector, out GameObject currentElement);
         currentElement.SetActive(true);
         SetObjectInFrontOfPlayer(currentElement);
-        ActiveElement = name;
+        ActiveSelector = selector;
     }
 
-    public void DeActivateElement(string name){
+    public void DeActivateElement(Selectors selector){
 
-        if (ActiveElement != "None"){
-            elements.TryGetValue(name, out GameObject currentElement);
+        if (ActiveSelector != Selectors.None){
+            selectors.TryGetValue(selector, out GameObject currentElement);
             currentElement.SetActive(false);
 
-            if (name != "Selector"){
-                ActiveElement = "None";
+            if (selector != Selectors.ElementSelector){
+                ActiveSelector = Selectors.None;
             }
         }
         else{
@@ -60,27 +58,23 @@ public class AttackManager : MonoBehaviour
         currentObject.transform.eulerAngles = new Vector3(0, currentObject.transform.eulerAngles.y, currentObject.transform.eulerAngles.z);
     }
 
-    private void AddElement(string name, GameObject prefab){
+    private void AddSelector(Selectors name, GameObject prefab){
         GameObject instance = Instantiate(prefab, Vector3.zero, Quaternion.identity);
         instance.SetActive(false);
-        elements.Add(name, instance);
+        selectors.Add(name, instance);
     }
 
     private void OnRIndexTrigger(){
         
-        if (!AttackActive){
-            AttackActive = true;
-
+        if (ActiveSelector == Selectors.None){
             fsm.SwitchState(typeof(ElementSelectionState));
         }
     }
 
     private void OnRIndexTriggerLoose(){
 
-        // if (AttackActive){
-        //     AttackActive = false;
-
-        //     fsm.SwitchState(typeof(ElementIdleState));
-        // }
+        if (ActiveSelector != Selectors.None){
+            fsm.SwitchState(typeof(ElementIdleState));
+        }
     }
 }

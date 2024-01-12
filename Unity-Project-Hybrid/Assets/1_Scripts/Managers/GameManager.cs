@@ -45,19 +45,17 @@ public class GameManager : MonoBehaviour
 
     private GameObject GetNPCPrefab(Wave currentWave){
         
-        for (int i = 0; i < 10000; i++){
+        float totalAmount = currentWave.NatureAmount + currentWave.FireAmount + currentWave.WaterAmount;
+        float randomValue = Random.Range(0f, totalAmount);
 
-            if (Random.Range(0.0f, 1.0f) <= currentWave.NatureAmount){
-                return GameSettings.Instance.NatureNPCPrefab;
-            }
-            if (Random.Range(0.0f, 1.0f) <= currentWave.FireAmount){
-                return GameSettings.Instance.FireNPCPrefab;
-            }
-            if (Random.Range(0.0f, 1.0f) <= currentWave.WaterAmount){
-                return GameSettings.Instance.WaterNPCPrefab;
-            }
+        if (randomValue < currentWave.NatureAmount){
+            return GameSettings.Instance.NatureNPCPrefab;
         }
-
-        return null;
+        else if (randomValue < currentWave.NatureAmount + currentWave.FireAmount){
+            return GameSettings.Instance.FireNPCPrefab;
+        }
+        else{
+            return GameSettings.Instance.WaterNPCPrefab;
+        }
     }
 }
