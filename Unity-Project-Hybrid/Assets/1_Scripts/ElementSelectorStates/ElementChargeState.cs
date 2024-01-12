@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class ElementChargeState : BaseState<AttackManager>
 {
-    private int RuinHits;
-    private int TotalRuinHits;
+    private int currentRuinHits;
+    private RuinManager currentRuins;
 
     public override void OnStart()
     {
         HandTriggerDetector.Instance.OnTrigger += OnTrigger;
 
-        if (blackboard.ActiveSelector == Selectors.NatureSelector){
-            TotalRuinHits = AttackSettings.Instance.NatureRuinAmount;
+        if (blackboard.ActiveSelector == SelectorsEnum.NatureSelector){
+            currentRuins = blackboard.GetSelector(SelectorsEnum.NatureSelector).GetComponent<RuinManager>();
         }
 
-        if (blackboard.ActiveSelector == Selectors.WaterSelector){
-            TotalRuinHits = AttackSettings.Instance.WaterRuinAmount;
+        if (blackboard.ActiveSelector == SelectorsEnum.WaterSelector){
+            currentRuins = blackboard.GetSelector(SelectorsEnum.WaterSelector).GetComponent<RuinManager>();
         }
 
-        if (blackboard.ActiveSelector == Selectors.FireSelector){
-            TotalRuinHits = AttackSettings.Instance.FireRuinAmount;
+        if (blackboard.ActiveSelector == SelectorsEnum.FireSelector){
+            currentRuins = blackboard.GetSelector(SelectorsEnum.FireSelector).GetComponent<RuinManager>();
         }
 
-        RuinHits = 0;
+        currentRuinHits = 0;
+        currentRuins.EnableAllRuins();
         blackboard.ActivateElement(blackboard.ActiveSelector);
     }
 
@@ -33,11 +34,13 @@ public class ElementChargeState : BaseState<AttackManager>
         blackboard.DeActivateElement(blackboard.ActiveSelector);
     }
 
-    private void OnTrigger(Selectors trigger){
-        if (trigger == blackboard.ActiveSelector){
-            RuinHits++;
+    private void OnTrigger(RuinTrigger trigger){
 
-            if (RuinHits >= TotalRuinHits){
+        if (trigger.TriggerEnum == blackboard.ActiveSelector){
+            currentRuinHits++;
+            trigger.Disable();
+
+            if (currentRuinHits >= currentRuins.RuinCount){
                 Shoot();
             }
         }

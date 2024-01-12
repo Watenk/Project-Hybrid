@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Selectors{
+public enum SelectorsEnum{
     NatureSelector,
     FireSelector,
     WaterSelector,

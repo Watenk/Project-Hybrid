@@ -31,9 +31,4 @@ public class AttackSettings : ScriptableObject
     [Header("Cooldowns")]
     public float AttackCooldown;
     public float TriggerDelay;
-    
-    [Header("Ruins")]
-    public int NatureRuinAmount;
-    public int FireRuinAmount;
-    public int WaterRuinAmount;
 }

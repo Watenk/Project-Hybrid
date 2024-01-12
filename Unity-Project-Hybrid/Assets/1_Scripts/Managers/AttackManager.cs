@@ -6,19 +6,20 @@ using UnityEngine;
 
 public class AttackManager : MonoBehaviour
 {
-    public Selectors ActiveSelector = Selectors.None;
+    public SelectorsEnum ActiveSelector = SelectorsEnum.None;
     
     private FSM<AttackManager> fsm;
-    private Dictionary<Selectors, GameObject> selectors = new Dictionary<Selectors, GameObject>();
+    private Dictionary<SelectorsEnum, GameObject> selectors = new Dictionary<SelectorsEnum, GameObject>();
+    private Vector3 previousPlayerPos = Vector3.zero;
 
     public void Start(){
         InputManager.Instance.OnRIndexTrigger += OnRIndexTrigger;
         InputManager.Instance.OnRIndexTriggerLoose += OnRIndexTriggerLoose;
 
-        AddSelector(Selectors.ElementSelector, AttackSettings.Instance.ElementSelector);
-        AddSelector(Selectors.WaterSelector, AttackSettings.Instance.WaterSelector);
-        AddSelector(Selectors.NatureSelector, AttackSettings.Instance.NatureSelector);
-        AddSelector(Selectors.FireSelector, AttackSettings.Instance.FireSelector);
+        AddSelector(SelectorsEnum.ElementSelector, AttackSettings.Instance.ElementSelector);
+        AddSelector(SelectorsEnum.WaterSelector, AttackSettings.Instance.WaterSelector);
+        AddSelector(SelectorsEnum.NatureSelector, AttackSettings.Instance.NatureSelector);
+        AddSelector(SelectorsEnum.FireSelector, AttackSettings.Instance.FireSelector);
 
         fsm = new FSM<AttackManager>(this,
             new ElementIdleState(),
@@ -29,36 +30,51 @@ public class AttackManager : MonoBehaviour
         fsm.SwitchState(typeof(ElementIdleState));
     }
 
-    public void ActivateElement(Selectors selector){
+    public void ActivateElement(SelectorsEnum selector){
 
         selectors.TryGetValue(selector, out GameObject currentElement);
         currentElement.SetActive(true);
-        SetObjectInFrontOfPlayer(currentElement);
+        if (selector == SelectorsEnum.ElementSelector){
+            SetObjectInFrontOfPlayer(currentElement, true);
+        }
+        else{
+            SetObjectInFrontOfPlayer(currentElement, false);
+        }
         ActiveSelector = selector;
     }
 
-    public void DeActivateElement(Selectors selector){
+    public void DeActivateElement(SelectorsEnum selector){
 
-        if (ActiveSelector != Selectors.None){
+        if (ActiveSelector != SelectorsEnum.None){
             selectors.TryGetValue(selector, out GameObject currentElement);
             currentElement.SetActive(false);
-
-            if (selector != Selectors.ElementSelector){
-                ActiveSelector = Selectors.None;
-            }
         }
         else{
-            Debug.LogError("Tried to deactivate element: " + name + " while none are active");
+            Debug.LogError("Tried to deactivate element: " + selector + " while none are active");
         }
     }
 
-    private void SetObjectInFrontOfPlayer(GameObject currentObject){
-        currentObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * AttackSettings.Instance.ElementSelectorDistanceFromCam;
-        currentObject.transform.LookAt(Camera.main.transform);
-        currentObject.transform.eulerAngles = new Vector3(0, currentObject.transform.eulerAngles.y, currentObject.transform.eulerAngles.z);
+    public GameObject GetSelector(SelectorsEnum selector){
+        selectors.TryGetValue(selector, out GameObject currentElement);
+        return currentElement;
     }
 
-    private void AddSelector(Selectors name, GameObject prefab){
+    private void SetObjectInFrontOfPlayer(GameObject currentObject, bool isElementSelector){
+
+        if (isElementSelector){
+            currentObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * AttackSettings.Instance.ElementSelectorDistanceFromCam;
+            currentObject.transform.LookAt(Camera.main.transform);
+            currentObject.transform.eulerAngles = new Vector3(0, currentObject.transform.eulerAngles.y, currentObject.transform.eulerAngles.z);
+            previousPlayerPos = currentObject.transform.position;
+        }
+        else{
+            currentObject.transform.position = previousPlayerPos;
+            currentObject.transform.LookAt(Camera.main.transform);
+            currentObject.transform.eulerAngles = new Vector3(0, currentObject.transform.eulerAngles.y, currentObject.transform.eulerAngles.z);
+        }
+    }
+
+    private void AddSelector(SelectorsEnum name, GameObject prefab){
         GameObject instance = Instantiate(prefab, Vector3.zero, Quaternion.identity);
         instance.SetActive(false);
         selectors.Add(name, instance);
@@ -66,15 +82,16 @@ public class AttackManager : MonoBehaviour
 
     private void OnRIndexTrigger(){
         
-        if (ActiveSelector == Selectors.None){
+        if (ActiveSelector == SelectorsEnum.None){
             fsm.SwitchState(typeof(ElementSelectionState));
         }
     }
 
     private void OnRIndexTriggerLoose(){
 
-        if (ActiveSelector != Selectors.None){
+        if (ActiveSelector != SelectorsEnum.None){
             fsm.SwitchState(typeof(ElementIdleState));
+            ActiveSelector = SelectorsEnum.None;
         }
     }
 }

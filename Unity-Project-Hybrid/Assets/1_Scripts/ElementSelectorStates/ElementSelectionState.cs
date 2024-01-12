@@ -8,30 +8,30 @@ public class ElementSelectionState : BaseState<AttackManager>
     {
         HandTriggerDetector.Instance.OnTrigger += OnTrigger;
 
-        blackboard.ActivateElement(Selectors.ElementSelector);
+        blackboard.ActivateElement(SelectorsEnum.ElementSelector);
     }
     
     public override void OnExit()
     {
         HandTriggerDetector.Instance.OnTrigger -= OnTrigger;
 
-        blackboard.DeActivateElement(Selectors.ElementSelector);
+        blackboard.DeActivateElement(SelectorsEnum.ElementSelector);
     }
 
-    private void OnTrigger(Selectors trigger){
+    private void OnTrigger(RuinTrigger trigger){
 
-        if (trigger == Selectors.WaterSelector){
-            blackboard.ActiveSelector = Selectors.WaterSelector;
+        if (trigger.TriggerEnum == SelectorsEnum.WaterSelector){
+            blackboard.ActiveSelector = SelectorsEnum.WaterSelector;
             fsm.SwitchState(typeof(ElementChargeState));
         }
 
-        if (trigger == Selectors.FireSelector){
-            blackboard.ActiveSelector = Selectors.FireSelector;
+        if (trigger.TriggerEnum == SelectorsEnum.FireSelector){
+            blackboard.ActiveSelector = SelectorsEnum.FireSelector;
             fsm.SwitchState(typeof(ElementChargeState));
         }
 
-        if (trigger == Selectors.NatureSelector){
-            blackboard.ActiveSelector = Selectors.NatureSelector;
+        if (trigger.TriggerEnum == SelectorsEnum.NatureSelector){
+            blackboard.ActiveSelector = SelectorsEnum.NatureSelector;
             fsm.SwitchState(typeof(ElementChargeState));
         }
 

@@ -8,7 +8,7 @@ public class HandTriggerDetector : MonoBehaviour
 {
     public static HandTriggerDetector Instance { get; private set; }
 
-    public event Action<Selectors> OnTrigger;
+    public event Action<RuinTrigger> OnTrigger;
 
     public void Awake(){
         Instance = this;
@@ -16,8 +16,11 @@ public class HandTriggerDetector : MonoBehaviour
 
     public void OnTriggerEnter(Collider other){
         if (other.gameObject.layer == LayerMask.NameToLayer("Trigger") && OnTrigger != null){
-            Trigger receiver = other.gameObject.GetComponent<Trigger>();
-            OnTrigger(receiver.TriggerEnum);
+            RuinTrigger trigger = other.gameObject.GetComponent<RuinTrigger>();
+
+            if (trigger == null) { Debug.LogError(trigger.name + " Is missing the trigger script"); }
+
+            OnTrigger(trigger);
         }
     }
 }
