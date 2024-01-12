@@ -18,12 +18,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_Jacket.002
-    second: {fileID: 2100000, guid: 7a5a6a3b162f61e45a86c20d0654cf4e, type: 2}
+    second: {fileID: 2100000, guid: 5b856b2cf2e1c0c46a30a863ab0369db, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_Pants.002
-    second: {fileID: 2100000, guid: dbc703e625e993e4caf7343494cc2f9d, type: 2}
+    second: {fileID: 2100000, guid: 12b1f522f0e8a2240b29616165c1e9cd, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
