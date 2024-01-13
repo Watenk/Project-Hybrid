@@ -3,7 +3,27 @@ guid: 89de68780edaf174282d71f248cc96ed
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Body.002
+    second: {fileID: 2100000, guid: f823a9f0241d9e142a9fb5389959166e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Eyes.002
+    second: {fileID: 2100000, guid: 3c6e71a38f330fc469b3d5b546cad3cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Jacket.002
+    second: {fileID: 2100000, guid: 5b856b2cf2e1c0c46a30a863ab0369db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Pants.002
+    second: {fileID: 2100000, guid: 12b1f522f0e8a2240b29616165c1e9cd, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
