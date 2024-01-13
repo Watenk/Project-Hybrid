@@ -6,6 +6,7 @@ public class ElementChargeState : BaseState<AttackManager>
 {
     private int currentRuinHits;
     private RuinManager currentRuins;
+    private NatureAnimation natureAnimation;
 
     public override void OnStart()
     {
@@ -13,14 +14,17 @@ public class ElementChargeState : BaseState<AttackManager>
 
         if (blackboard.ActiveSelector == SelectorsEnum.NatureSelector){
             currentRuins = blackboard.GetSelector(SelectorsEnum.NatureSelector).GetComponent<RuinManager>();
+            blackboard.ActivateProjectile(SelectorsEnum.NatureSelector);
         }
 
         if (blackboard.ActiveSelector == SelectorsEnum.WaterSelector){
             currentRuins = blackboard.GetSelector(SelectorsEnum.WaterSelector).GetComponent<RuinManager>();
+            blackboard.ActivateProjectile(SelectorsEnum.WaterSelector);
         }
 
         if (blackboard.ActiveSelector == SelectorsEnum.FireSelector){
             currentRuins = blackboard.GetSelector(SelectorsEnum.FireSelector).GetComponent<RuinManager>();
+            blackboard.ActivateProjectile(SelectorsEnum.FireSelector);
         }
 
         currentRuinHits = 0;

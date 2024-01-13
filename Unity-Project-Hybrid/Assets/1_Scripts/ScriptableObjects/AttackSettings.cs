@@ -24,6 +24,12 @@ public class AttackSettings : ScriptableObject
     public GameObject FireSelector;
     public GameObject NatureSelector;
     public GameObject WaterSelector;
+    public GameObject FireProjector;
+    public GameObject NatureProjectile;
+    public GameObject WaterProjectile;
+
+    [Header("Objects")]
+    public GameObject Hand;
 
     [Header("Position")]
     public float ElementSelectorDistanceFromCam;

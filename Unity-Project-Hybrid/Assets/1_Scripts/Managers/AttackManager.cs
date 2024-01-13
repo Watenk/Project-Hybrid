@@ -54,6 +54,19 @@ public class AttackManager : MonoBehaviour
         }
     }
 
+    public void ActivateProjectile(SelectorsEnum selector){
+
+        selectors.TryGetValue(selector, out GameObject currentElement);
+        currentElement.SetActive(true);
+        if (selector == SelectorsEnum.ElementSelector){
+            SetObjectInFrontOfPlayer(currentElement, true);
+        }
+        else{
+            SetObjectInFrontOfPlayer(currentElement, false);
+        }
+        ActiveSelector = selector;
+    }
+
     public GameObject GetSelector(SelectorsEnum selector){
         selectors.TryGetValue(selector, out GameObject currentElement);
         return currentElement;
