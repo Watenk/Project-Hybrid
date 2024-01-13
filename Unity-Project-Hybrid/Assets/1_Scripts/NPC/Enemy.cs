@@ -6,7 +6,7 @@ public class Enemy : NPC
 {
     public override void InitFSM()
     {
-        fsm = new NPCFSM(this,
+        fsm = new FSM<NPC>(this,
             new EnemyIdleState(),
             new EnemyWalkState(),
             new EnemyAttackState()
