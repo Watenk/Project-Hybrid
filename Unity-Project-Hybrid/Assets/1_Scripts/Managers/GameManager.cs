@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    //GameObjects
+    //References
     public HandTriggerDetector HandTriggerDetector;
+    public GameObject Player;
 
     // Managers
     private GameObjectManager gameObjectManager;
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour
     private InputManager inputManager;
     private AnimationManager animationManager;
     private SoundManager soundManager;
-    private RuinPatternManager weaponManager;
+    private AttackManager attackManager;
     private WaveManager waveManager;
 
     //------------------------------------------------
@@ -46,6 +47,14 @@ public class GameManager : MonoBehaviour
         return animationManager;
     }
 
+    public GameObjectManager GetGameObjectManager(){
+        return gameObjectManager;
+    }
+
+    public AttackManager GetAttackManager(){
+        return attackManager;
+    }
+
     //------------------------------------------------
 
     private void InitManagers(){
@@ -60,7 +69,7 @@ public class GameManager : MonoBehaviour
         inputManager = new InputManager();
         animationManager = new AnimationManager();
         soundManager = new SoundManager();
-        weaponManager = new RuinPatternManager(gameObjectManager, HandTriggerDetector, inputManager);
+        attackManager = new AttackManager(gameObjectManager, HandTriggerDetector, inputManager);
         npcManager = new NPCManager(agentManager);
         waveManager = new WaveManager(enemyManager, npcManager);
     }

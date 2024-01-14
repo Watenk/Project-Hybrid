@@ -25,6 +25,9 @@ public class GameSettings : ScriptableObject
     public GameObject FireRuinPattern;
     public GameObject WaterRuinPattern;
     public GameObject NatureRuinPattern;
+    public GameObject FireProjectile;
+    public GameObject WaterProjectile;
+    public GameObject NatureProjectile;
 
     [Header("Waves")]
     [Tooltip("The game starts at the first wave and when all the enemy's in that wave are dead it proceeds to the next wave")]
@@ -35,7 +38,10 @@ public class GameSettings : ScriptableObject
     public float MaxIdleTime;
     public int NPCHealth;
 
-    [Header("Patterns")]
-    public float PatternDistanceFromCam;
-    //[Header("Projectiles")]
+    [Header("Element Patterns")]
+    public float ElementPatternDistanceFromCam;
+    public float ElementAttackCooldown;
+
+    [Header("Enemy's")]
+    public float EnemyAttackDistance;
 }

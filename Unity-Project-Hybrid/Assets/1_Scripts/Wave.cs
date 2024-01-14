@@ -24,4 +24,7 @@ public class Wave
 
     [Range(0.0f, 50.0f)]
     public float MaxDistanceFromPlayer;
+
+    [Range(0.0f, 100f)]
+    public float AttackChance;
 }

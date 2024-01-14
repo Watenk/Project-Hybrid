@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuinPatternChargeState : BaseState<RuinPatternManager>
+public class RuinPatternChargeState : BaseState<AttackManager>
 {
     private int currentRuinHits;
     private Elements currentElement;

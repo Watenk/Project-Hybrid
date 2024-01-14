@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class RuinPatternManager
+public class AttackManager : IUpdateable
 {
     private bool active;
+    private float attackcooldownTimer;
     private Elements element;
-    private FSM<RuinPatternManager> ruinPatternFsm;
-    private Dictionary<Elements, RuinPattern> ruinPatterns = new Dictionary<Elements, RuinPattern>();
     private Vector3 previousPlayerPos;
+    private FSM<AttackManager> ruinPatternFsm;
+    private Dictionary<Elements, RuinPattern> ruinPatterns = new Dictionary<Elements, RuinPattern>();
+    private Dictionary<Elements, GameObject> projectiles = new Dictionary<Elements, GameObject>();
 
     //References
     public HandTriggerDetector handTriggerDetector;
@@ -18,7 +20,7 @@ public class RuinPatternManager
 
     //-----------------------------------------------------
 
-    public RuinPatternManager(GameObjectManager gameObjectManager, HandTriggerDetector handTriggerDetector, InputManager inputManager){
+    public AttackManager(GameObjectManager gameObjectManager, HandTriggerDetector handTriggerDetector, InputManager inputManager){
 
         inputManager.OnRIndexTrigger += OnIndexTrigger;
         inputManager.OnRIndexTriggerLoose += OnIndexTriggerLoose;
@@ -29,7 +31,8 @@ public class RuinPatternManager
         this.inputManager = inputManager;
         if (handTriggerDetector == null) { Debug.LogError("HandTriggerDetector GameObject Doesn't contain the HandTriggerDetector Script"); } 
 
-        ruinPatternFsm = new FSM<RuinPatternManager>(this,
+        // FSM
+        ruinPatternFsm = new FSM<AttackManager>(this,
             new RuinPatternIdleState(),
             new RuinPatternSelectionState(),
             new RuinPatternChargeState(),
@@ -37,6 +40,12 @@ public class RuinPatternManager
         );
         ruinPatternFsm.SwitchState(typeof(RuinPatternIdleState));
 
+        // Projectiles
+        projectiles.Add(Elements.Nature, GameSettings.Instance.NatureProjectile);
+        projectiles.Add(Elements.Water, GameSettings.Instance.WaterProjectile);
+        projectiles.Add(Elements.Fire, GameSettings.Instance.FireProjectile);
+
+        // Ruin Patterns
         AddRuinPattern(Elements.Selection, GameSettings.Instance.RuinPatternSelector);
         AddRuinPattern(Elements.Nature, GameSettings.Instance.NatureRuinPattern);
         AddRuinPattern(Elements.Water, GameSettings.Instance.WaterRuinPattern);
@@ -45,9 +54,21 @@ public class RuinPatternManager
         ResetRuinPatterns();
     }
 
+    public void OnUpdate()
+    {
+        if (attackcooldownTimer >= 0){
+            attackcooldownTimer -= Time.deltaTime;
+        }
+    }
+
     public RuinPattern GetRuinPattern(Elements element){
         ruinPatterns.TryGetValue(element, out RuinPattern ruinPattern);
         return ruinPattern;
+    }
+
+    public GameObject GetProjectile(Elements element){
+        projectiles.TryGetValue(element, out GameObject projectile);
+        return projectile;
     }
 
     public void RuinPatternSetActive(Elements element, bool onOrOff){
@@ -75,7 +96,7 @@ public class RuinPatternManager
     //---------------------------------------------------------
 
     private void OnIndexTrigger(){
-        if (!active){
+        if (!active && attackcooldownTimer <= 0){
             ruinPatternFsm.SwitchState(typeof(RuinPatternSelectionState));
             active = true;
         }
@@ -85,6 +106,7 @@ public class RuinPatternManager
         if (active){
             ruinPatternFsm.SwitchState(typeof(RuinPatternIdleState));
             active = false;
+            attackcooldownTimer = GameSettings.Instance.ElementAttackCooldown;
         }
     }
 
@@ -103,7 +125,7 @@ public class RuinPatternManager
     private void SetObjectInFrontOfPlayer(GameObject currentObject, Elements element){
 
         if (element == Elements.Selection){
-            currentObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * GameSettings.Instance.PatternDistanceFromCam;
+            currentObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * GameSettings.Instance.ElementPatternDistanceFromCam;
             currentObject.transform.LookAt(Camera.main.transform);
             currentObject.transform.eulerAngles = new Vector3(0, currentObject.transform.eulerAngles.y, currentObject.transform.eulerAngles.z);
             previousPlayerPos = currentObject.transform.position;
