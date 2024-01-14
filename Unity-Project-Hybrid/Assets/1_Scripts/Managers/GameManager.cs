@@ -1,72 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    private int currentWaveIndex;
-    private Wave currentWave;
+    //GameObjects
+    public HandTriggerDetector HandTriggerDetector;
+
+    // Managers
+    private GameObjectManager gameObjectManager;
+    private AgentManager agentManager;
+    private NPCManager npcManager;
+    private EnemyManager enemyManager;
+    private InputManager inputManager;
+    private AnimationManager animationManager;
+    private SoundManager soundManager;
+    private RuinPatternManager weaponManager;
+    private WaveManager waveManager;
+
+    //------------------------------------------------
 
     public void Awake(){
         Instance = this;
     }
 
     public void Start(){
-        StartWave(currentWaveIndex);
+        InitManagers();
+
+        waveManager.StartWave(0);
     }
 
     public void Update(){
-        // Fix This
-        if (CheckIfWaveIsDone()){
-            currentWaveIndex++;
-
-            if (currentWaveIndex < GameSettings.Instance.waves.Count){
-                StartWave(currentWaveIndex);
-            }
-        }
+        // Check when to progress to the next wave
+        inputManager.OnUpdate();
     }
 
-    public void StartWave(int index){
-        
-        currentWave = GameSettings.Instance.waves[index];
-        NPCManager.Instance.ClearAll();
-
-        for (int i = 0; i < currentWave.NPCAmount; i++){
-            NPCManager.Instance.AddNPC(GetNPCPrefab(currentWave), typeof(NPC), currentWave);
-        }
-
-        for (int i = 0; i < currentWave.EnemyAmount; i++){
-            NPCManager.Instance.AddNPC(GetNPCPrefab(currentWave), typeof(Enemy), currentWave);
-        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    public WaveManager GetWaveManager(){
+        return waveManager;
     }
 
-    public bool CheckIfWaveIsDone(){
-        if (NPCManager.Instance.GetEnemyAmount() == 0){
-            return true;
-        }
-
-        return false;
+    public AnimationManager GetAnimationManager(){
+        return animationManager;
     }
 
-    public Wave GetCurrentWave(){
-        return currentWave;
-    }
+    //------------------------------------------------
 
-    private GameObject GetNPCPrefab(Wave currentWave){
-        
-        float totalAmount = currentWave.NatureAmount + currentWave.FireAmount + currentWave.WaterAmount;
-        float randomValue = Random.Range(0f, totalAmount);
+    private void InitManagers(){
 
-        if (randomValue < currentWave.NatureAmount){
-            return GameSettings.Instance.NatureNPCPrefab;
-        }
-        else if (randomValue < currentWave.NatureAmount + currentWave.FireAmount){
-            return GameSettings.Instance.FireNPCPrefab;
-        }
-        else{
-            return GameSettings.Instance.WaterNPCPrefab;
-        }
+        // Monobehaviours
+        GameObject gameObjectManagerGO = new GameObject();
+        gameObjectManager = gameObjectManagerGO.AddComponent<GameObjectManager>();
+
+        // Non-Monobehaviours
+        agentManager = new AgentManager(gameObjectManager);
+        enemyManager = new EnemyManager(agentManager);
+        inputManager = new InputManager();
+        animationManager = new AnimationManager();
+        soundManager = new SoundManager();
+        weaponManager = new RuinPatternManager(gameObjectManager, HandTriggerDetector, inputManager);
+        npcManager = new NPCManager(agentManager);
+        waveManager = new WaveManager(enemyManager, npcManager);
     }
 }

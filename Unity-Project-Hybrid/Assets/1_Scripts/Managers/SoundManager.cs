@@ -2,7 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public enum SoundSource{
+    Music,
+    SFX0,
+    SFX1
+}
+
+public class SoundManager
 {
     public static SoundManager Instance { get; private set; }
 
@@ -46,10 +52,4 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
-}
-
-public enum SoundSource{
-    Music,
-    SFX0,
-    SFX1
 }
