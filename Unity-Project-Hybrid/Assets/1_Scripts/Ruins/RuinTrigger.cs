@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager 
+public class RuinTrigger : MonoBehaviour
 {
-
+    public Elements element;
 }
