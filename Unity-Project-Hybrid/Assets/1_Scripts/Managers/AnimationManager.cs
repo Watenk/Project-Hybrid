@@ -12,6 +12,18 @@ public class AnimationManager
         animator.ResetTrigger(trigger);
     }
 
+    public void PlayWalkingAnimation(GameObject gameObject){
+        Animator animator = gameObject.GetComponent<Animator>();
+        if (animator == null) { Debug.LogError("Tried to play animation on GameObject that doesn't have a Animator Component"); }
+        StartAnimation(animator, "Walking");
+    }
+
+    public void StopWalkingAnimation(GameObject gameObject){
+        Animator animator = gameObject.GetComponent<Animator>();
+        if (animator == null) { Debug.LogError("Tried to play animation on GameObject that doesn't have a Animator Component"); }
+        StopAnimation(animator, "Walking");
+    }
+
     //     public float thrustPower;
     // public List<ParticleSystem> riseParticles;
 

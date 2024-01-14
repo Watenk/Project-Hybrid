@@ -33,6 +33,9 @@ public class GameSettings : ScriptableObject
     [Header("Creatures")]
     public float MinIdleTime;
     public float MaxIdleTime;
+    public int NPCHealth;
 
+    [Header("Patterns")]
+    public float PatternDistanceFromCam;
     //[Header("Projectiles")]
 }

@@ -13,11 +13,15 @@ public class NPC : MonoBehaviour, IDamageable
     protected FSM<NPC> fsm;
 
     //References
-    public WaveManager waveManager;
+    private WaveManager waveManager;
+    private AnimationManager animationManager;
 
-    public void Init(int maxHealth){
+    public void Start(){
+
         GameObject = this.gameObject;
-        MaxHealth = maxHealth;
+        this.waveManager = GameManager.Instance.GetWaveManager();
+        this.animationManager = GameManager.Instance.GetAnimationManager();
+        MaxHealth = GameSettings.Instance.NPCHealth;
         Health = MaxHealth;
         Agent = GetComponent<NavMeshAgent>();
         
@@ -37,6 +41,14 @@ public class NPC : MonoBehaviour, IDamageable
     public void FixedUpdate(){
 
         fsm.OnUpdate();
+    }
+
+    public WaveManager GetWaveManager(){
+        return waveManager;
+    }
+
+    public AnimationManager GetAnimationManager(){
+        return animationManager;
     }
 
     public void TakeDamage(int amount)

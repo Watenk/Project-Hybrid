@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     //GameObjects
     public HandTriggerDetector HandTriggerDetector;
 
@@ -21,6 +23,10 @@ public class GameManager : MonoBehaviour
 
     //------------------------------------------------
 
+    public void Awake(){
+        Instance = this;
+    }
+
     public void Start(){
         InitManagers();
 
@@ -29,6 +35,15 @@ public class GameManager : MonoBehaviour
 
     public void Update(){
         // Check when to progress to the next wave
+        inputManager.OnUpdate();
+    }
+
+    public WaveManager GetWaveManager(){
+        return waveManager;
+    }
+
+    public AnimationManager GetAnimationManager(){
+        return animationManager;
     }
 
     //------------------------------------------------
@@ -41,12 +56,12 @@ public class GameManager : MonoBehaviour
 
         // Non-Monobehaviours
         agentManager = new AgentManager(gameObjectManager);
-        npcManager = new NPCManager(agentManager);
         enemyManager = new EnemyManager(agentManager);
         inputManager = new InputManager();
         animationManager = new AnimationManager();
         soundManager = new SoundManager();
-        weaponManager = new RuinPatternManager(gameObjectManager, HandTriggerDetector);
+        weaponManager = new RuinPatternManager(gameObjectManager, HandTriggerDetector, inputManager);
+        npcManager = new NPCManager(agentManager);
         waveManager = new WaveManager(enemyManager, npcManager);
     }
 }

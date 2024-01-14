@@ -26,7 +26,6 @@ MonoBehaviour:
     type: 3}
   NatureRuinPattern: {fileID: 1620885994612986769, guid: b60d0fd2c3a1021418b2284e6aec4757,
     type: 3}
-  HandTriggerDetector: {fileID: 0}
   waves:
   - NPCAmount: 1
     EnemyAmount: 1
@@ -34,13 +33,15 @@ MonoBehaviour:
     FireAmount: 0
     WaterAmount: 1
     MinDistanceFromPlayer: 5
-    MaxDistanceFromPlayer: 20.1
+    MaxDistanceFromPlayer: 15
   - NPCAmount: 2
     EnemyAmount: 1
     NatureAmount: 1
     FireAmount: 0
     WaterAmount: 1
     MinDistanceFromPlayer: 5
-    MaxDistanceFromPlayer: 20
+    MaxDistanceFromPlayer: 15
   MinIdleTime: 1
   MaxIdleTime: 5
+  NPCHealth: 1
+  PatternDistanceFromCam: 0.3

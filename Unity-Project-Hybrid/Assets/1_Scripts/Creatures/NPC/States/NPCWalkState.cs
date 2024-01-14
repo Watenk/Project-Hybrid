@@ -6,9 +6,9 @@ public class NPCWalkState : BaseState<NPC>
 {
     public override void OnStart()
     {   
-        Vector3 newPos = blackboard.waveManager.GetAgentPos(blackboard.waveManager.GetCurrentWave()); 
+        Vector3 newPos = blackboard.GetWaveManager().GetAgentPos(blackboard.GetWaveManager().GetCurrentWave()); 
         blackboard.Agent.SetDestination(newPos);
-        //blackboard.animator.PlayWalkingAnimation();
+        blackboard.GetAnimationManager().PlayWalkingAnimation(blackboard.gameObject);
     }
 
     public override void OnUpdate()
@@ -20,6 +20,6 @@ public class NPCWalkState : BaseState<NPC>
 
     public override void OnExit()
     {
-        //blackboard.animator.StopWalkAnimation();
+        blackboard.GetAnimationManager().StopWalkingAnimation(blackboard.gameObject);
     }
 }
