@@ -5,5 +5,6 @@ using UnityEngine;
 public enum Elements{
     Nature,
     Fire,
-    Water
+    Water,
+    Selection
 }

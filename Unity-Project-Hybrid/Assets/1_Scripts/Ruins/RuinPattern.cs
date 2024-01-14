@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class RuinPattern : MonoBehaviour
 {
-    public Elements Element;
-
     private List<GameObject> disabledRuins = new List<GameObject>();
     private List<GameObject> enabledRuins = new List<GameObject>();
 
     //--------------------------------------------------------
 
     public void Start(){
-
-        GameSettings.Instance.HandTriggerDetector.OnRuinTrigger += OnRuinTrigger;
 
         foreach (Transform child in transform)
         {
@@ -39,11 +35,7 @@ public class RuinPattern : MonoBehaviour
         ruin.SetActive(false);
     }
 
-    //---------------------------------------
-
-    private void OnRuinTrigger(RuinTrigger ruin){
-        if (ruin.element == Element){
-            DisableRuin(ruin.gameObject);
-        }
+    public int GetRuinCount(){
+        return disabledRuins.Count + enabledRuins.Count;
     }
 }

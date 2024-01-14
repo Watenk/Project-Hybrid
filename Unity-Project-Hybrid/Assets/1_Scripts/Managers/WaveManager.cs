@@ -34,6 +34,10 @@ public class WaveManager
         StartWave(waveIndex);
     }
 
+    public Wave GetCurrentWave(){
+        return waves[waveIndex];
+    }
+
     //--------------------------------------------
 
     private void SummonWaveAgents(Wave wave){

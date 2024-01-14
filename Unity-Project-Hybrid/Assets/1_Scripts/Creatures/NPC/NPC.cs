@@ -13,7 +13,7 @@ public class NPC : MonoBehaviour, IDamageable
     protected FSM<NPC> fsm;
 
     //References
-    protected WaveManager waveManager;
+    public WaveManager waveManager;
 
     public void Init(int maxHealth){
         GameObject = this.gameObject;

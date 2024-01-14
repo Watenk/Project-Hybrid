@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuinPatternShootState : BaseState<RuinManager>
+public class RuinPatternShootState : BaseState<RuinPatternManager>
 {
-    // public override void OnStart()
-    // {
-    //     blackboard.DeActivateElement(blackboard.ActiveSelector);
-    //     blackboard.ActiveSelector = SelectorsEnum.None;
-    // }
+    public override void OnStart()
+    {
+        
+    }
 }

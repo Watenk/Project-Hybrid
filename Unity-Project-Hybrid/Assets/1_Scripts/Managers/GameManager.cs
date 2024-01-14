@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //GameObjects
+    public HandTriggerDetector HandTriggerDetector;
+
     // Managers
     private GameObjectManager gameObjectManager;
     private AgentManager agentManager;
@@ -13,7 +16,7 @@ public class GameManager : MonoBehaviour
     private InputManager inputManager;
     private AnimationManager animationManager;
     private SoundManager soundManager;
-    private RuinManager weaponManager;
+    private RuinPatternManager weaponManager;
     private WaveManager waveManager;
 
     //------------------------------------------------
@@ -43,7 +46,7 @@ public class GameManager : MonoBehaviour
         inputManager = new InputManager();
         animationManager = new AnimationManager();
         soundManager = new SoundManager();
-        weaponManager = new RuinManager(gameObjectManager);
+        weaponManager = new RuinPatternManager(gameObjectManager, HandTriggerDetector);
         waveManager = new WaveManager(enemyManager, npcManager);
     }
 }

@@ -18,6 +18,15 @@ MonoBehaviour:
     type: 3}
   NatureNPCPrefab: {fileID: 769544554473199008, guid: a3959205adfa6254a86d98dd662a63b4,
     type: 3}
+  RuinPatternSelector: {fileID: 5766465000343669500, guid: d03538fd00fe7f24fb6c5cce0daee4e8,
+    type: 3}
+  FireRuinPattern: {fileID: 1620885994612986769, guid: a75562ac879210046a5c9145aaaf1856,
+    type: 3}
+  WaterRuinPattern: {fileID: 1620885994612986769, guid: 57dca2610a1fdaf44a39acbfe3ea8ddc,
+    type: 3}
+  NatureRuinPattern: {fileID: 1620885994612986769, guid: b60d0fd2c3a1021418b2284e6aec4757,
+    type: 3}
+  HandTriggerDetector: {fileID: 0}
   waves:
   - NPCAmount: 1
     EnemyAmount: 1
@@ -33,3 +42,5 @@ MonoBehaviour:
     WaterAmount: 1
     MinDistanceFromPlayer: 5
     MaxDistanceFromPlayer: 20
+  MinIdleTime: 1
+  MaxIdleTime: 5

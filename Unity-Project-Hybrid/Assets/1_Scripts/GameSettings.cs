@@ -21,12 +21,10 @@ public class GameSettings : ScriptableObject
     public GameObject FireNPCPrefab;
     public GameObject WaterNPCPrefab;
     public GameObject NatureNPCPrefab;
+    public GameObject RuinPatternSelector;
     public GameObject FireRuinPattern;
     public GameObject WaterRuinPattern;
     public GameObject NatureRuinPattern;
-
-    [Header("References")]
-    public HandTriggerDetector HandTriggerDetector; 
 
     [Header("Waves")]
     [Tooltip("The game starts at the first wave and when all the enemy's in that wave are dead it proceeds to the next wave")]

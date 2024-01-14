@@ -2,38 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuinPatternSelectionState : BaseState<RuinManager>
+public class RuinPatternSelectionState : BaseState<RuinPatternManager>
 {
-    // public override void OnStart()
-    // {
-    //     HandTriggerDetector.Instance.OnTrigger += OnTrigger;
+    public override void OnStart()
+    {
+        blackboard.handTriggerDetector.OnRuinTrigger += OnRuinTrigger;
 
-    //     blackboard.ActivateElement(SelectorsEnum.ElementSelector);
-    // }
+        blackboard.RuinPatternSetActive(Elements.Selection, true);
+    }
     
-    // public override void OnExit()
-    // {
-    //     HandTriggerDetector.Instance.OnTrigger -= OnTrigger;
+    public override void OnExit()
+    {
+        blackboard.handTriggerDetector.OnRuinTrigger -= OnRuinTrigger;
 
-    //     blackboard.DeActivateElement(SelectorsEnum.ElementSelector);
-    // }
+        blackboard.RuinPatternSetActive(Elements.Selection, false);
+    }
 
-    // private void OnTrigger(RuinTrigger trigger){
+    private void OnRuinTrigger(RuinTrigger ruinTrigger){
 
-    //     if (trigger.TriggerEnum == SelectorsEnum.WaterSelector){
-    //         blackboard.ActiveSelector = SelectorsEnum.WaterSelector;
-    //         fsm.SwitchState(typeof(RuinPatternChargeState));
-    //     }
-
-    //     if (trigger.TriggerEnum == SelectorsEnum.FireSelector){
-    //         blackboard.ActiveSelector = SelectorsEnum.FireSelector;
-    //         fsm.SwitchState(typeof(RuinPatternChargeState));
-    //     }
-
-    //     if (trigger.TriggerEnum == SelectorsEnum.NatureSelector){
-    //         blackboard.ActiveSelector = SelectorsEnum.NatureSelector;
-    //         fsm.SwitchState(typeof(RuinPatternChargeState));
-    //     }
-
-    // }
+        blackboard.SetElement(ruinTrigger.element);
+        fsm.SwitchState(typeof(RuinPatternChargeState));
+    }
 }
