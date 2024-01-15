@@ -60,7 +60,23 @@ MonoBehaviour:
     MinDistanceFromPlayer: 5
     MaxDistanceFromPlayer: 15
     AttackChance: 10
+  - NPCAmount: 1
+    EnemyAmount: 1
+    NatureAmount: 1
+    FireAmount: 0
+    WaterAmount: 1
+    MinDistanceFromPlayer: 5
+    MaxDistanceFromPlayer: 15
+    AttackChance: 10
   - NPCAmount: 2
+    EnemyAmount: 1
+    NatureAmount: 1
+    FireAmount: 0
+    WaterAmount: 1
+    MinDistanceFromPlayer: 5
+    MaxDistanceFromPlayer: 15
+    AttackChance: 10
+  - NPCAmount: 5
     EnemyAmount: 1
     NatureAmount: 1
     FireAmount: 0
