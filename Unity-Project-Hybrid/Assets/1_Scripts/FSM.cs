@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// The generic is a blackboard
 public class FSM<T>
 {
     public BaseState<T> currentState;
@@ -32,6 +33,7 @@ public class FSM<T>
     }
 }
 
+// The generic is a blackboard
 public abstract class BaseState<T>
 {
     protected FSM<T> fsm;

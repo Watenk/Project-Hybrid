@@ -1,78 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class NPCManager : MonoBehaviour
+public class NPCManager 
 {
-    public static NPCManager Instance { get; private set; }
-
     private List<NPC> npcs = new List<NPC>();
-    private List<Enemy> enemys = new List<Enemy>();
 
-    public void Awake(){
-        Instance = this;
+    //References
+    private AgentManager agentManager;
+
+    //--------------------------------------------
+
+    public NPCManager(AgentManager agentManager){
+        this.agentManager = agentManager;
     }
 
-    public void AddNPC(GameObject currentPrefab, System.Type npcScript, Wave wave){
-
-        // Instantiate
-        Vector3 currentPos = GetRandomPosForNPC(wave);
-        GameObject npcInstance = Instantiate(currentPrefab, currentPos, Quaternion.identity);
-
-        // Add script
-        npcInstance.AddComponent(npcScript);
-        NPC currentNPC = null;
-        if (npcInstance.GetComponent<Enemy>() != null){
-            currentNPC = npcInstance.GetComponent<Enemy>();
-            enemys.Add(npcInstance.GetComponent<Enemy>());
-        }
-        else{
-            currentNPC = npcInstance.GetComponent<NPC>();
-            npcs.Add(npcInstance.GetComponent<NPC>());
-        }
-         
-        if (currentNPC == null) { Debug.LogError(npcInstance.name + " Doesn't contain NPC"); }
-
-        // Init NPC
-        currentNPC.Init(NPCSettings.Instance.MaxHealth);
-        currentNPC.Agent.speed = Random.Range(NPCSettings.Instance.MinSpeed, NPCSettings.Instance.MaxSpeed);
-        currentNPC.Agent.acceleration = NPCSettings.Instance.Acceleration;
+    public NPC AddNPC(Elements element, GameObject prefab){
+        NavMeshAgent agent = agentManager.AddAgent(prefab);
+        NPC newNPC = agent.gameObject.AddComponent<NPC>();
+        npcs.Add(newNPC);
+        AddIndicator(newNPC.gameObject);
+        newNPC.SetElement(element);
+        return newNPC;
     }
 
-    public void RemoveNPC(NPC currentNPC){
-
-        if (currentNPC.GetComponent<Enemy>() != null){
-            enemys.Remove(currentNPC.GetComponent<Enemy>());
-        }
-        else{
-            npcs.Remove(currentNPC);
-        }
-
-        Destroy(currentNPC);
+    public NPC AddNPC(Elements element, GameObject prefab, Vector3 pos){
+        NPC newNPC = AddNPC(element, prefab);
+        newNPC.gameObject.transform.position = pos;
+        return newNPC;
     }
 
-    public void ClearAll(){
-        foreach (NPC currentNPC in npcs){
-            Destroy(currentNPC);
-        }
-        npcs.Clear();
-
-        foreach (Enemy currentEnemy in enemys){
-            Destroy(currentEnemy);
-        }
-        enemys.Clear();
+    public NPC AddNPC(Elements element, GameObject prefab, Vector3 pos, Quaternion rotation){
+        NPC newNPC = AddNPC(element, prefab, pos);
+        newNPC.gameObject.transform.rotation = rotation;
+        return newNPC;
     }
 
-    public Vector3 GetRandomPosForNPC(Wave wave){
-        float randomAngle = Random.Range(0f, 2f * Mathf.PI);
-        float randomDistance = Random.Range(wave.MinDistanceFromPlayer, wave.MaxDistanceFromPlayer);
-        float x = randomDistance * Mathf.Cos(randomAngle);
-        float z = randomDistance * Mathf.Sin(randomAngle);
-
-        return new Vector3(x, 1f, z);
+    public int GetNPCCount(){
+        return npcs.Count;
     }
 
-    public int GetEnemyAmount(){
-        return enemys.Count;
+    public void ClearNPCs(){
+        for (int i = GetNPCCount() - 1; i >= 0; i--){
+            RemoveNPC(npcs[i]);
+        }
+    }
+
+    public void RemoveNPC(NPC removeNPC){
+        npcs.Remove(removeNPC);
+        agentManager.RemoveAgent(removeNPC.gameObject);
+    }
+
+    //--------------------------------------------------------
+
+    private void AddIndicator(GameObject npc){
+        GameObjectManager gameObjectManager = GameManager.Instance.GetGameObjectManager();
+        GameObject prefab = GameSettings.Instance.NPCIndicator;
+        GameObject indicator = gameObjectManager.AddGameObject(prefab, npc.transform.position);
+        indicator.transform.parent = npc.transform;
     }
 }

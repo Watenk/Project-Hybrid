@@ -3,17 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputManager : IUpdateable
 {
-    public static InputManager Instance { get; private set; }
     public event Action OnRIndexTrigger;
     public event Action OnRIndexTriggerLoose;
 
-    public void Awake(){
-        Instance = this;
-    }
-
-    public void Update(){
+    public void OnUpdate()
+    {
         if (CheckRIndexTriggerDown()) { 
             OnRIndexTrigger(); 
         }

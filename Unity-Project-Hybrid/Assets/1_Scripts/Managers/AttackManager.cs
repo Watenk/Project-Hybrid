@@ -1,97 +1,179 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.XR;
 
-public class AttackManager : MonoBehaviour
+public class AttackManager : IUpdateable
 {
-    public SelectorsEnum ActiveSelector = SelectorsEnum.None;
-    
-    private FSM<AttackManager> fsm;
-    private Dictionary<SelectorsEnum, GameObject> selectors = new Dictionary<SelectorsEnum, GameObject>();
-    private Vector3 previousPlayerPos = Vector3.zero;
+    private bool active;
+    private float attackcooldownTimer;
+    private Elements element;
+    private Vector3 previousPlayerPos;
+    private FSM<AttackManager> ruinPatternFsm;
+    private Dictionary<Elements, RuinPattern> ruinPatterns = new Dictionary<Elements, RuinPattern>();
+    private Dictionary<Elements, GameObject> projectiles = new Dictionary<Elements, GameObject>();
 
-    public void Start(){
-        InputManager.Instance.OnRIndexTrigger += OnRIndexTrigger;
-        InputManager.Instance.OnRIndexTriggerLoose += OnRIndexTriggerLoose;
+    //References
+    public HandTriggerDetector handTriggerDetector;
+    private GameObjectManager gameObjectManager;
+    private InputManager inputManager;
 
-        AddSelector(SelectorsEnum.ElementSelector, AttackSettings.Instance.ElementSelector);
-        AddSelector(SelectorsEnum.WaterSelector, AttackSettings.Instance.WaterSelector);
-        AddSelector(SelectorsEnum.NatureSelector, AttackSettings.Instance.NatureSelector);
-        AddSelector(SelectorsEnum.FireSelector, AttackSettings.Instance.FireSelector);
+    //-----------------------------------------------------
 
-        fsm = new FSM<AttackManager>(this,
-            new ElementIdleState(),
-            new ElementSelectionState(),
-            new ElementChargeState(),
-            new ElementShootState()
+    public AttackManager(GameObjectManager gameObjectManager, HandTriggerDetector handTriggerDetector, InputManager inputManager){
+
+        inputManager.OnRIndexTrigger += OnIndexTrigger;
+        inputManager.OnRIndexTriggerLoose += OnIndexTriggerLoose;
+
+        active = false;
+        this.gameObjectManager = gameObjectManager;
+        this.handTriggerDetector = handTriggerDetector;
+        this.inputManager = inputManager;
+        if (handTriggerDetector == null) { Debug.LogError("HandTriggerDetector GameObject Doesn't contain the HandTriggerDetector Script"); } 
+
+        // FSM
+        ruinPatternFsm = new FSM<AttackManager>(this,
+            new RuinPatternIdleState(),
+            new RuinPatternSelectionState(),
+            new RuinPatternChargeState(),
+            new RuinPatternShootState()
         );
-        fsm.SwitchState(typeof(ElementIdleState));
+        ruinPatternFsm.SwitchState(typeof(RuinPatternIdleState));
+
+        // Projectiles
+        AddProjectile(Elements.Nature, GameSettings.Instance.NatureProjectile);
+        AddProjectile(Elements.Water, GameSettings.Instance.WaterProjectile);
+        AddProjectile(Elements.Fire, GameSettings.Instance.FireProjectile);
+
+        // Ruin Patterns
+        AddRuinPattern(Elements.Selection, GameSettings.Instance.RuinPatternSelector);
+        AddRuinPattern(Elements.Nature, GameSettings.Instance.NatureRuinPattern);
+        AddRuinPattern(Elements.Water, GameSettings.Instance.WaterRuinPattern);
+        AddRuinPattern(Elements.Fire, GameSettings.Instance.FireRuinPattern);
+
+        ResetRuinPatterns();
     }
 
-    public void ActivateElement(SelectorsEnum selector){
+    public void OnUpdate()
+    {
+        if (attackcooldownTimer >= 0){
+            attackcooldownTimer -= Time.deltaTime;
+        }
 
-        selectors.TryGetValue(selector, out GameObject currentElement);
-        currentElement.SetActive(true);
-        if (selector == SelectorsEnum.ElementSelector){
-            SetObjectInFrontOfPlayer(currentElement, true);
-        }
-        else{
-            SetObjectInFrontOfPlayer(currentElement, false);
-        }
-        ActiveSelector = selector;
+        ruinPatternFsm.OnUpdate();
     }
 
-    public void DeActivateElement(SelectorsEnum selector){
+    // Ruins
 
-        if (ActiveSelector != SelectorsEnum.None){
-            selectors.TryGetValue(selector, out GameObject currentElement);
-            currentElement.SetActive(false);
-        }
-        else{
-            Debug.LogError("Tried to deactivate element: " + selector + " while none are active");
-        }
+    public RuinPattern GetRuinPattern(Elements element){
+        ruinPatterns.TryGetValue(element, out RuinPattern ruinPattern);
+        return ruinPattern;
     }
 
-    public GameObject GetSelector(SelectorsEnum selector){
-        selectors.TryGetValue(selector, out GameObject currentElement);
-        return currentElement;
+    public void RuinPatternSetActive(Elements element, bool onOrOff){
+        ruinPatterns.TryGetValue(element, out RuinPattern ruinPattern);
+        ruinPattern.gameObject.SetActive(onOrOff);
+        SetObjectInFrontOfPlayer(ruinPattern.gameObject, GameSettings.Instance.ElementPatternDistanceFromCam);
     }
 
-    private void SetObjectInFrontOfPlayer(GameObject currentObject, bool isElementSelector){
-
-        if (isElementSelector){
-            currentObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * AttackSettings.Instance.ElementSelectorDistanceFromCam;
-            currentObject.transform.LookAt(Camera.main.transform);
-            currentObject.transform.eulerAngles = new Vector3(0, currentObject.transform.eulerAngles.y, currentObject.transform.eulerAngles.z);
-            previousPlayerPos = currentObject.transform.position;
-        }
-        else{
-            currentObject.transform.position = previousPlayerPos;
-            currentObject.transform.LookAt(Camera.main.transform);
-            currentObject.transform.eulerAngles = new Vector3(0, currentObject.transform.eulerAngles.y, currentObject.transform.eulerAngles.z);
-        }
-    }
-
-    private void AddSelector(SelectorsEnum name, GameObject prefab){
-        GameObject instance = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-        instance.SetActive(false);
-        selectors.Add(name, instance);
-    }
-
-    private void OnRIndexTrigger(){
-        
-        if (ActiveSelector == SelectorsEnum.None){
-            fsm.SwitchState(typeof(ElementSelectionState));
+    public void ResetRuinPatterns(){
+        foreach (KeyValuePair<Elements, RuinPattern> pair in ruinPatterns){
+            RuinPattern ruinPattern = pair.Value;
+            ruinPattern.EnableAllRuins();
+            ruinPattern.gameObject.SetActive(false);
         }
     }
 
-    private void OnRIndexTriggerLoose(){
+    // Projectiles
 
-        if (ActiveSelector != SelectorsEnum.None){
-            fsm.SwitchState(typeof(ElementIdleState));
-            ActiveSelector = SelectorsEnum.None;
+    public void ResetProjectiles(){
+        foreach (KeyValuePair<Elements, GameObject> pair in projectiles){
+            
+            IProjectile projectile = GetProjectile(pair.Key);
+            projectile.Reset();
+            
+            GameObject projectileGameObject = pair.Value;
+            projectileGameObject.SetActive(false);
         }
+    }
+
+    public void ProjectileSetActive(Elements element, bool onOrOff){
+        projectiles.TryGetValue(element, out GameObject projectile);
+        projectile.SetActive(onOrOff);
+        SetObjectInFrontOfPlayer(projectile, GameSettings.Instance.ProjectileDistanceFromCam);
+    }
+
+    public void SetProjectileRotation(Elements element, Quaternion rotation){
+        projectiles.TryGetValue(element, out GameObject projectile);
+        projectile.transform.rotation = rotation;
+    }
+
+    public IProjectile GetProjectile(Elements element){
+        projectiles.TryGetValue(element, out GameObject projectileGameObject);
+        IProjectile projectile = projectileGameObject.GetComponent<IProjectile>();
+        if (projectile == null) { Debug.LogError(projectileGameObject.name + " Doesn't contain the IProjectile Interface"); }
+        return projectile;
+    }
+
+    // Elements
+
+    public Elements GetElement(){
+        return element;
+    }
+
+    public void SetElement(Elements element){
+        this.element = element;
+    }
+
+    //---------------------------------------------------------
+
+    // Events
+
+    private void OnIndexTrigger(){
+        if (!active && attackcooldownTimer <= 0){
+            ruinPatternFsm.SwitchState(typeof(RuinPatternSelectionState));
+            active = true;
+        }
+    }
+
+    private void OnIndexTriggerLoose(){
+        if (active){
+            ruinPatternFsm.SwitchState(typeof(RuinPatternIdleState));
+            active = false;
+            attackcooldownTimer = GameSettings.Instance.ElementAttackCooldown;
+        }
+    }
+
+    // Ruins
+
+    private void AddRuinPattern(Elements element, GameObject prefab){
+        GameObject ruinPatternGameObject = gameObjectManager.AddGameObject(prefab);
+        RuinPattern ruinPattern = GetRuinPattern(ruinPatternGameObject);
+        ruinPatterns.Add(element, ruinPattern);
+        ruinPattern.Init();
+    }
+
+    private RuinPattern GetRuinPattern(GameObject gameObject){
+        RuinPattern ruinPattern = gameObject.GetComponent<RuinPattern>();
+        if (ruinPattern == null) { Debug.LogError(gameObject.name + " Doesn't contain RuinPattern"); }
+        return ruinPattern;
+    }
+
+    // Projectiles
+
+    private void AddProjectile(Elements element, GameObject prefab){
+        GameObject projectileGameObject = gameObjectManager.AddGameObject(prefab);
+        projectiles.Add(element, projectileGameObject);
+        GetProjectile(element).Init();
+        projectileGameObject.SetActive(false);
+    }
+
+    // Other
+
+    private void SetObjectInFrontOfPlayer(GameObject currentObject, float distance){
+        currentObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance;
+        currentObject.transform.LookAt(Camera.main.transform);
+        currentObject.transform.eulerAngles = new Vector3(0, currentObject.transform.eulerAngles.y, currentObject.transform.eulerAngles.z);
+        previousPlayerPos = currentObject.transform.position;
     }
 }
