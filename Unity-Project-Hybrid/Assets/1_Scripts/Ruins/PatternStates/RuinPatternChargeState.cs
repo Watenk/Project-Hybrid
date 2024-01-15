@@ -7,23 +7,31 @@ public class RuinPatternChargeState : BaseState<AttackManager>
     private int currentRuinHits;
     private Elements currentElement;
     private RuinPattern currentRuinPattern;
+    private IProjectile currentProjectile;
 
-    public override void OnStart()
-    {
+    //---------------------------------------------------
+
+    public override void OnStart(){
         blackboard.handTriggerDetector.OnRuinTrigger += OnRuinTrigger;
 
-        currentRuinHits = 0;
-        currentElement = blackboard.GetElement();
+        currentProjectile = blackboard.GetProjectile(currentElement);
         currentRuinPattern = blackboard.GetRuinPattern(currentElement);
+        currentElement = blackboard.GetElement();
+        
+        currentRuinHits = 0;
         blackboard.RuinPatternSetActive(currentElement, true);
+        blackboard.ProjectileSetActive(currentElement, true);
+        blackboard.SetProjectileRotation(currentElement ,GameManager.Instance.Player.transform.rotation);
+        currentProjectile.Charge();
     }
 
-    public override void OnExit()
-    {
-        blackboard.handTriggerDetector.OnRuinTrigger += OnRuinTrigger;
+    public override void OnExit(){
+        blackboard.handTriggerDetector.OnRuinTrigger -= OnRuinTrigger;
         
         blackboard.RuinPatternSetActive(currentElement, false);
     }
+
+    //----------------------------------------------------
 
     private void OnRuinTrigger(RuinTrigger ruinTrigger){
 

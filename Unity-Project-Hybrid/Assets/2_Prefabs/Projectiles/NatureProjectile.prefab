@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 520890234974403161}
   - component: {fileID: 3610216116329178447}
   - component: {fileID: 5426443322751155953}
-  - component: {fileID: 8405006856948354162}
-  m_Layer: 0
+  - component: {fileID: 3386865393648929041}
+  m_Layer: 9
   m_Name: NatureProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8716809300088846086}
   - {fileID: 4224951690049883019}
@@ -46,8 +46,8 @@ Rigidbody:
   m_GameObject: {fileID: 1972857026914052865}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 0.05
+  m_Drag: 0
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -62,7 +62,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!65 &5426443322751155953
 BoxCollider:
@@ -85,7 +85,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.24, y: 2.18, z: 3.12}
   m_Center: {x: -0.09, y: -0.64, z: 0.19}
---- !u!114 &8405006856948354162
+--- !u!114 &3386865393648929041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,10 +94,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1972857026914052865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5909368fd7fffd49aa95e6358ddafe9, type: 3}
+  m_Script: {fileID: 11500000, guid: f9d85a23c0fcafe4db2d1cdecf753f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrustPower: 500
   riseParticles:
   - {fileID: 3573404318008134944}
   - {fileID: 1828785168454941813}
@@ -112,7 +111,7 @@ GameObject:
   - component: {fileID: 5146079440782155025}
   - component: {fileID: 4003942412835076847}
   - component: {fileID: 3531350132652022104}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DefaultBrown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4951,7 +4950,7 @@ GameObject:
   - component: {fileID: 7215225485190938130}
   - component: {fileID: 1828785168454941813}
   - component: {fileID: 684584861489486657}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RiseBlack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9839,7 +9838,7 @@ GameObject:
   - component: {fileID: 5391727950314315354}
   - component: {fileID: 7841378462025962330}
   - component: {fileID: 2474554656979340551}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DefaultYellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14678,7 +14677,7 @@ GameObject:
   - component: {fileID: 4224951690049883019}
   - component: {fileID: 3573404318008134944}
   - component: {fileID: 5758232388348924924}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RiseBrown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19617,6 +19616,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TreeV2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3bc1e10f3812b9041bd990fa9870158e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

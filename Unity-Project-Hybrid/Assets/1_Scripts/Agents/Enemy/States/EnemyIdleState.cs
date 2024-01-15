@@ -8,7 +8,7 @@ public class EnemyIdleState : BaseState<NPCBlackboard>
 
     public override void OnStart()
     {
-        timer = Random.Range(GameSettings.Instance.MinIdleTime, GameSettings.Instance.MaxIdleTime);
+        timer = Random.Range(GameSettings.Instance.AgentMinIdleTime, GameSettings.Instance.AgentMaxIdleTime);
     }
 
     public override void OnUpdate()

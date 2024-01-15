@@ -20,6 +20,6 @@ public class EnemyAttackState : BaseState<NPCBlackboard>
     //-----------------------------------------------
 
     private void AttackPlayer(){
-        blackboard.gameObjectManager.AddGameObject(blackboard.attackManager.GetProjectile(blackboard.attackManager.GetElement()));
+        Debug.LogError("HitPlayer (Need To Implement)");
     }
 }

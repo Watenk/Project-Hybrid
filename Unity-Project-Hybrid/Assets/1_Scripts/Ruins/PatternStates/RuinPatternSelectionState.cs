@@ -8,6 +8,8 @@ public class RuinPatternSelectionState : BaseState<AttackManager>
     {
         blackboard.handTriggerDetector.OnRuinTrigger += OnRuinTrigger;
 
+        blackboard.ResetRuinPatterns();
+        blackboard.ResetProjectiles();
         blackboard.RuinPatternSetActive(Elements.Selection, true);
     }
     

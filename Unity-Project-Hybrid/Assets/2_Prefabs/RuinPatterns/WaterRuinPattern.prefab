@@ -51,6 +51,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe78c70cf18d85a49960d700d51769d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enabledRuins:
+  - {fileID: 8437122334521234143}
+  - {fileID: 4052712939142001031}
+  - {fileID: 5426965483992243920}
+  - {fileID: 1655940741876935792}
+  - {fileID: 600904782126032593}
+  - {fileID: 5452338593651383468}
+  - {fileID: 2512005179544371262}
 --- !u!1001 &330942446529256320
 PrefabInstance:
   m_ObjectHideFlags: 0

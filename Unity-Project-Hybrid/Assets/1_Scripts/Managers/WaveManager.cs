@@ -12,6 +12,7 @@ public class WaveManager
     //References
     private EnemyManager enemyManager;
     private NPCManager npcManager;
+    private Elements currentElement;
 
     //------------------------------------------
 
@@ -46,14 +47,14 @@ public class WaveManager
         for (int i = 0; i < wave.NPCAmount; i++){
             Vector3 agentPos = GetAgentPos(wave);
             GameObject agentPrefab = GetAgentPrefab(wave);
-            npcManager.AddNPC(agentPrefab, agentPos);
+            npcManager.AddNPC(currentElement, agentPrefab, agentPos);
         }
 
         // Add Enemy's
         for (int i = 0; i < wave.EnemyAmount; i++){
             Vector3 agentPos = GetAgentPos(wave);
             GameObject agentPrefab = GetAgentPrefab(wave);
-            enemyManager.AddEnemy(agentPrefab, agentPos);
+            enemyManager.AddEnemy(currentElement, agentPrefab, agentPos);
         }
     }
 
@@ -77,12 +78,15 @@ public class WaveManager
         float randomValue = UnityEngine.Random.Range(0f, totalAmount);
 
         if (randomValue < currentWave.NatureAmount){
+            currentElement = Elements.Nature;
             return GameSettings.Instance.NatureNPCPrefab;
         }
         else if (randomValue < currentWave.NatureAmount + currentWave.FireAmount){
+            currentElement = Elements.Fire;
             return GameSettings.Instance.FireNPCPrefab;
         }
         else{
+            currentElement = Elements.Water;
             return GameSettings.Instance.WaterNPCPrefab;
         }
     }

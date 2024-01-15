@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     //References
     public HandTriggerDetector HandTriggerDetector;
     public GameObject Player;
+    public GameObject Hand;
 
     // Managers
     private GameObjectManager gameObjectManager;
@@ -35,8 +36,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void Update(){
-        // Check when to progress to the next wave
         inputManager.OnUpdate();
+        attackManager.OnUpdate();
+
+        if (enemyManager.GetEnemyCount() == 0){
+            waveManager.StartNextWave();
+        }
     }
 
     public WaveManager GetWaveManager(){
@@ -53,6 +58,14 @@ public class GameManager : MonoBehaviour
 
     public AttackManager GetAttackManager(){
         return attackManager;
+    }
+
+    public NPCManager GetNPCManager(){
+        return npcManager;
+    }
+
+    public EnemyManager GetEnemyManager(){
+        return enemyManager;
     }
 
     //------------------------------------------------

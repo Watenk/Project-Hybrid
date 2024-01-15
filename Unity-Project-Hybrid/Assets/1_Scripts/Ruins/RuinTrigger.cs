@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class RuinTrigger : MonoBehaviour
 {
-public Elements element;
+    public Elements element;
 }

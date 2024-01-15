@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class RuinPattern : MonoBehaviour
 {
+    public List<GameObject> enabledRuins = new List<GameObject>();
+
     private List<GameObject> disabledRuins = new List<GameObject>();
-    private List<GameObject> enabledRuins = new List<GameObject>();
+    private int ruinCount;
 
     //--------------------------------------------------------
 
-    public void Start(){
+    public void Init(){
 
-        foreach (Transform child in transform)
-        {
-            enabledRuins.Add(child.gameObject);
-        }
+        ruinCount = enabledRuins.Count - 1;
     }
 
     public void EnableAllRuins(){
         foreach (GameObject ruin in disabledRuins){
-            EnableRuin(ruin);
+            enabledRuins.Add(ruin);
+            ruin.SetActive(true);
         }
+
+        disabledRuins.Clear();
     }
 
     public void EnableRuin(GameObject ruin){
@@ -36,6 +38,6 @@ public class RuinPattern : MonoBehaviour
     }
 
     public int GetRuinCount(){
-        return disabledRuins.Count + enabledRuins.Count;
+        return ruinCount;
     }
 }

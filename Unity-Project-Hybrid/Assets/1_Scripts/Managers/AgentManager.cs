@@ -19,6 +19,7 @@ public class AgentManager
     public NavMeshAgent AddAgent(GameObject prefab){
         GameObject instance = gameObjectManager.AddGameObject(prefab);
         NavMeshAgent agent = GetAgent(instance);
+        agent.speed = Random.Range(GameSettings.Instance.AgentMinSpeed, GameSettings.Instance.AgentMaxSpeed);
         agents.Add(agent);
         return agent;
     }
