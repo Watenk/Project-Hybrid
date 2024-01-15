@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuinPatternSelectionState : BaseState<RuinPatternManager>
+public class RuinPatternSelectionState : BaseState<AttackManager>
 {
     public override void OnStart()
     {
         blackboard.handTriggerDetector.OnRuinTrigger += OnRuinTrigger;
 
+        blackboard.ResetRuinPatterns();
+        blackboard.ResetProjectiles();
         blackboard.RuinPatternSetActive(Elements.Selection, true);
     }
     

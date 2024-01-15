@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuinPatternIdleState : BaseState<RuinPatternManager>
+public class RuinPatternIdleState : BaseState<AttackManager>
 {
 
 }

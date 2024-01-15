@@ -7,8 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    //GameObjects
+    //References
     public HandTriggerDetector HandTriggerDetector;
+    public GameObject Player;
+    public GameObject Hand;
 
     // Managers
     private GameObjectManager gameObjectManager;
@@ -18,7 +20,7 @@ public class GameManager : MonoBehaviour
     private InputManager inputManager;
     private AnimationManager animationManager;
     private SoundManager soundManager;
-    private RuinPatternManager weaponManager;
+    private AttackManager attackManager;
     private WaveManager waveManager;
 
     //------------------------------------------------
@@ -34,8 +36,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void Update(){
-        // Check when to progress to the next wave
         inputManager.OnUpdate();
+        attackManager.OnUpdate();
+
+        if (enemyManager.GetEnemyCount() == 0){
+            waveManager.StartNextWave();
+        }
     }
 
     public WaveManager GetWaveManager(){
@@ -44,6 +50,22 @@ public class GameManager : MonoBehaviour
 
     public AnimationManager GetAnimationManager(){
         return animationManager;
+    }
+
+    public GameObjectManager GetGameObjectManager(){
+        return gameObjectManager;
+    }
+
+    public AttackManager GetAttackManager(){
+        return attackManager;
+    }
+
+    public NPCManager GetNPCManager(){
+        return npcManager;
+    }
+
+    public EnemyManager GetEnemyManager(){
+        return enemyManager;
     }
 
     //------------------------------------------------
@@ -60,7 +82,7 @@ public class GameManager : MonoBehaviour
         inputManager = new InputManager();
         animationManager = new AnimationManager();
         soundManager = new SoundManager();
-        weaponManager = new RuinPatternManager(gameObjectManager, HandTriggerDetector, inputManager);
+        attackManager = new AttackManager(gameObjectManager, HandTriggerDetector, inputManager);
         npcManager = new NPCManager(agentManager);
         waveManager = new WaveManager(enemyManager, npcManager);
     }

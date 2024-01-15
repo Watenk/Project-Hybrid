@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCIdleState : BaseState<NPC>
+public class NPCIdleState : BaseState<NPCBlackboard>
 {
     private float timer;
 
     public override void OnStart()
     {
-        timer = Random.Range(GameSettings.Instance.MinIdleTime, GameSettings.Instance.MaxIdleTime);
+        timer = Random.Range(GameSettings.Instance.AgentMinIdleTime, GameSettings.Instance.AgentMaxIdleTime);
     }
 
     public override void OnUpdate()
