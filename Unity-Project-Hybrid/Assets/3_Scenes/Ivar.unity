@@ -269,8 +269,7 @@ GameObject:
   - component: {fileID: 264709075}
   - component: {fileID: 264709078}
   - component: {fileID: 264709077}
-  - component: {fileID: 264709076}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,27 +291,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1858136008}
   m_LocalEulerAnglesHint: {x: 0, y: 87.598, z: 0}
---- !u!65 &264709076
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 264709074}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &264709077
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1875,7 +1853,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7063677494799897668, guid: 59753341134c68f45915def53e3a6790, type: 3}
+    - {fileID: 1515628674166739810, guid: 59753341134c68f45915def53e3a6790, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59753341134c68f45915def53e3a6790, type: 3}
@@ -2097,7 +2077,7 @@ GameObject:
   - component: {fileID: 1305749855}
   - component: {fileID: 1305749854}
   - component: {fileID: 1305749853}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2633,52 +2613,52 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: aaa3104531e7caf4d9555027ee34d036,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.04
+      value: -0.047
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aaa3104531e7caf4d9555027ee34d036,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.18
+      value: -0.069
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aaa3104531e7caf4d9555027ee34d036,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.54
+      value: 0.088
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aaa3104531e7caf4d9555027ee34d036,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.4570449
+      value: 0.23264182
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aaa3104531e7caf4d9555027ee34d036,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.167222
+      value: 0.29241183
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aaa3104531e7caf4d9555027ee34d036,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.75413096
+      value: 0.7430499
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aaa3104531e7caf4d9555027ee34d036,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.44094586
+      value: -0.55520266
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aaa3104531e7caf4d9555027ee34d036,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 30.811
+      value: 73.975
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aaa3104531e7caf4d9555027ee34d036,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 103.01
+      value: 175.63
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aaa3104531e7caf4d9555027ee34d036,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -49.726
+      value: 39.67
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: aaa3104531e7caf4d9555027ee34d036,
         type: 3}
@@ -3610,8 +3590,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.60599667, y: 1, z: 1.3379894}
+  m_Center: {x: -0.14071383, y: 0, z: 0.16899465}
 --- !u!23 &1858136010
 MeshRenderer:
   m_ObjectHideFlags: 0

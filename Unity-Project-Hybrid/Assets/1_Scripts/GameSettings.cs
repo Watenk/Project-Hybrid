@@ -57,6 +57,7 @@ public class GameSettings : ScriptableObject
     public int AgentHealth;
 
     [Header("Element Patterns")]
+    public float ElementsHeight;
     public float ElementPatternDistanceFromCam;
     public float ElementAttackCooldown;
 
