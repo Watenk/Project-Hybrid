@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,6 +13,9 @@ public class NPC : MonoBehaviour, IDamageable
     public Elements Element { get; private set; }
 
     protected FSM<NPCBlackboard> fsm;
+    protected float deathDurationTimer;
+    
+    private bool death = false;
 
     //------------------------------------------------
 
@@ -21,6 +25,7 @@ public class NPC : MonoBehaviour, IDamageable
         MaxHealth = GameSettings.Instance.AgentHealth;
         Health = MaxHealth;
         Agent = GetComponent<NavMeshAgent>();
+        deathDurationTimer = GameSettings.Instance.AgentDeathDuration;
         
         InitFSM();
 
@@ -36,8 +41,12 @@ public class NPC : MonoBehaviour, IDamageable
     }
 
     public void FixedUpdate(){
-
-        fsm.OnUpdate();
+        if (!death){
+            fsm.OnUpdate();
+        }
+        else{
+            DeathDuration();
+        }
     }
 
     public void OnTriggerEnter(Collider other){
@@ -77,8 +86,20 @@ public class NPC : MonoBehaviour, IDamageable
         }
     }
 
-    public virtual void Die()
+    public void Die()
     {
-        GameManager.Instance.GetNPCManager().RemoveNPC(this);
+        death = true;
+        Agent.SetDestination(this.gameObject.transform.position);
+        GameManager.Instance.GetNPCAnimationManager().PlayDeathAnimation(this.gameObject);
+    }
+
+    public virtual void DeathDuration(){
+        if (deathDurationTimer <= 0){
+            GameManager.Instance.Player.GetComponent<Player>().TakeDamage(1);
+            GameManager.Instance.GetNPCManager().RemoveNPC(this);
+        }
+        else{
+            deathDurationTimer -= Time.deltaTime;
+        }
     }
 }

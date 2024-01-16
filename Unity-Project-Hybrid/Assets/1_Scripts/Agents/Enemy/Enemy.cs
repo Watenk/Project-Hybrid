@@ -14,8 +14,12 @@ public class Enemy : NPC
         fsm.SwitchState(typeof(EnemyIdleState));
     }
 
-    public override void Die()
-    {
-        GameManager.Instance.GetEnemyManager().RemoveEnemy(this);
+    public override void DeathDuration(){
+        if (deathDurationTimer <= 0){
+            GameManager.Instance.GetEnemyManager().RemoveEnemy(this);
+        }
+        else{
+            deathDurationTimer -= Time.deltaTime;
+        }
     }
 }

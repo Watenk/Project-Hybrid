@@ -7,4 +7,5 @@ public enum Elements{
     Fire,
     Water,
     Selection,
+    Purple
 }

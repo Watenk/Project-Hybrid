@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class FireProjectile : MonoBehaviour, IProjectile
 {
-    public Elements ElementProjectile;
-    public Elements Element { get; private set; }
+    public Elements Element { get; private set; } = Elements.Fire;
 
     private Rigidbody rb;
 
     public void Init(){
-        Element = ElementProjectile;
         rb = GetComponent<Rigidbody>();
         if (rb == null) { Debug.LogError("NatureProjectile is missing a RigidBody"); } 
     }
