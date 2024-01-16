@@ -38,52 +38,48 @@ MonoBehaviour:
     type: 3}
   EnemyProjectile: {fileID: 9220883382875874799, guid: d977f263ebef7fd4391725407400ddd7,
     type: 3}
-  FireProjectileSpeed: 500
-  WaterProjectileSpeed: 500
-  NatureProjectileSpeed: 500
-  EnemyProjectileSpeed: 200
+  FireProjectileSpeed: 700
+  WaterProjectileSpeed: 700
+  NatureProjectileSpeed: 700
   ProjectileDistanceFromCam: 1
   ShootDelay: 1
-  PlayerHealth: 1
   AgentMinIdleTime: 1
   AgentMaxIdleTime: 5
   AgentMinSpeed: 2
   AgentMaxSpeed: 3
   AgentHealth: 1
-  ElementsHeight: 1.3
-  ElementPatternDistanceFromCam: 0.4
-  ElementAttackCooldown: 2
-  EnemyAttackDistance: 10
-  EnemyAttackChargeDuration: 1
+  ElementPatternDistanceFromCam: 0.5
+  ElementAttackCooldown: 0.5
+  EnemyAttackDistance: 5
   waves:
-  - NPCAmount: 5
+  - NPCAmount: 0
     EnemyAmount: 1
     NatureAmount: 1
     FireAmount: 0
-    WaterAmount: 1
+    WaterAmount: 0
     MinDistanceFromPlayer: 5
     MaxDistanceFromPlayer: 15
     AttackChance: 0
-  - NPCAmount: 1
-    EnemyAmount: 1
-    NatureAmount: 1
-    FireAmount: 0
-    WaterAmount: 1
-    MinDistanceFromPlayer: 5
-    MaxDistanceFromPlayer: 15
-    AttackChance: 10
   - NPCAmount: 2
     EnemyAmount: 1
     NatureAmount: 1
     FireAmount: 0
-    WaterAmount: 1
+    WaterAmount: 0
     MinDistanceFromPlayer: 5
     MaxDistanceFromPlayer: 15
-    AttackChance: 10
-  - NPCAmount: 5
+    AttackChance: 2.5
+  - NPCAmount: 4
+    EnemyAmount: 1
+    NatureAmount: 0.5
+    FireAmount: 1
+    WaterAmount: 0.7
+    MinDistanceFromPlayer: 5
+    MaxDistanceFromPlayer: 15
+    AttackChance: 5
+  - NPCAmount: 8
     EnemyAmount: 1
     NatureAmount: 1
-    FireAmount: 0
+    FireAmount: 1
     WaterAmount: 1
     MinDistanceFromPlayer: 5
     MaxDistanceFromPlayer: 15
