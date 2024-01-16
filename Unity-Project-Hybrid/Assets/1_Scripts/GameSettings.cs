@@ -55,6 +55,7 @@ public class GameSettings : ScriptableObject
     public int AgentMinSpeed;
     public int AgentMaxSpeed;
     public int AgentHealth;
+    public int AgentDeathDuration;
 
     [Header("Element Patterns")]
     public float ElementsHeight;
