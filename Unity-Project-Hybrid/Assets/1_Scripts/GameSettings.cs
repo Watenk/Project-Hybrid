@@ -42,6 +42,7 @@ public class GameSettings : ScriptableObject
     public float FireProjectileSpeed;
     public float WaterProjectileSpeed;
     public float NatureProjectileSpeed;
+    public float EnemyProjectileSpeed;
     public float ProjectileDistanceFromCam;
     public float ShootDelay;
 
@@ -58,6 +59,7 @@ public class GameSettings : ScriptableObject
 
     [Header("Enemy's")]
     public float EnemyAttackDistance;
+    public float EnemyAttackChargeDuration;
 
     [Header("Waves")]
     [Tooltip("The game starts at the first wave and when all the enemy's in that wave are dead it proceeds to the next wave")]

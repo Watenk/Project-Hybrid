@@ -41,6 +41,7 @@ MonoBehaviour:
   FireProjectileSpeed: 500
   WaterProjectileSpeed: 500
   NatureProjectileSpeed: 500
+  EnemyProjectileSpeed: 500
   ProjectileDistanceFromCam: 1
   ShootDelay: 1
   AgentMinIdleTime: 1
@@ -50,7 +51,8 @@ MonoBehaviour:
   AgentHealth: 1
   ElementPatternDistanceFromCam: 0.5
   ElementAttackCooldown: 2
-  EnemyAttackDistance: 5
+  EnemyAttackDistance: 10
+  EnemyAttackChargeDuration: 1
   waves:
   - NPCAmount: 1
     EnemyAmount: 1
@@ -59,7 +61,7 @@ MonoBehaviour:
     WaterAmount: 1
     MinDistanceFromPlayer: 5
     MaxDistanceFromPlayer: 15
-    AttackChance: 10
+    AttackChance: 100
   - NPCAmount: 1
     EnemyAmount: 1
     NatureAmount: 1
