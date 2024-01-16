@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 264709078}
   - component: {fileID: 264709077}
   - component: {fileID: 264709076}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2029,7 +2029,7 @@ GameObject:
   - component: {fileID: 1305749855}
   - component: {fileID: 1305749854}
   - component: {fileID: 1305749853}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2186,6 +2186,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b64706acd4fa3438c63af62f2c8ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &1468468809
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468468800}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7092261
+  m_Height: 2.5209801
+  m_Direction: 1
+  m_Center: {x: -0.051273286, y: -0.5815083, z: -0.0087195635}
 --- !u!1 &1605777876
 GameObject:
   m_ObjectHideFlags: 0
@@ -2593,6 +2616,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RightHand
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aaa3104531e7caf4d9555027ee34d036,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3719,9 +3747,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 26032722}
     m_Modifications:
+    - target: {fileID: 100000, guid: 4b650a383c3760f449b65ff48bccdd5f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 4b650a383c3760f449b65ff48bccdd5f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 4b650a383c3760f449b65ff48bccdd5f, type: 3}
       propertyPath: m_Name
       value: OVRCameraRig
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 4b650a383c3760f449b65ff48bccdd5f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 4b650a383c3760f449b65ff48bccdd5f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 109308, guid: 4b650a383c3760f449b65ff48bccdd5f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 113768, guid: 4b650a383c3760f449b65ff48bccdd5f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 159718, guid: 4b650a383c3760f449b65ff48bccdd5f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 168682, guid: 4b650a383c3760f449b65ff48bccdd5f, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 4b650a383c3760f449b65ff48bccdd5f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3766,6 +3826,14 @@ PrefabInstance:
     - target: {fileID: 2037080, guid: 4b650a383c3760f449b65ff48bccdd5f, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 951
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054112583220142, guid: 4b650a383c3760f449b65ff48bccdd5f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983321904398200, guid: 4b650a383c3760f449b65ff48bccdd5f, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 20000010189485334, guid: 4b650a383c3760f449b65ff48bccdd5f,
         type: 3}
@@ -3814,6 +3882,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1468468804}
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: 4b650a383c3760f449b65ff48bccdd5f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1468468809}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 4b650a383c3760f449b65ff48bccdd5f,
         type: 3}
       insertIndex: -1

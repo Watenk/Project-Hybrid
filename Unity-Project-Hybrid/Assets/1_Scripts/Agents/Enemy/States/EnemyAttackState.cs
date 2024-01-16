@@ -29,7 +29,8 @@ public class EnemyAttackState : BaseState<NPCBlackboard>
             GameObject enemyProjectile = GameManager.Instance.GetGameObjectManager().AddGameObject(GameSettings.Instance.EnemyProjectile, blackboard.npc.gameObject.transform.position);
             enemyProjectile.transform.LookAt(GameManager.Instance.Player.gameObject.transform.position);
             Rigidbody enemyProjectileRB = enemyProjectile.GetComponent<Rigidbody>();
-            enemyProjectileRB.AddForce((Vector3.forward * -1) * GameSettings.Instance.EnemyProjectileSpeed);
+            Vector3 shootDirection = (GameManager.Instance.Player.gameObject.transform.position - enemyProjectile.transform.position).normalized;
+            enemyProjectileRB.AddForce(shootDirection * GameSettings.Instance.EnemyProjectileSpeed);
             fsm.SwitchState(typeof(EnemyIdleState));
         }
 

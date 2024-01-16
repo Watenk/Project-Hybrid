@@ -46,6 +46,9 @@ public class GameSettings : ScriptableObject
     public float ProjectileDistanceFromCam;
     public float ShootDelay;
 
+    [Header("Player")]
+    public int PlayerHealth;
+
     [Header("Agents")]
     public float AgentMinIdleTime;
     public float AgentMaxIdleTime;

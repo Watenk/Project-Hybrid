@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class WaterProjectile : MonoBehaviour, IProjectile
+public class EnemyProjectile : MonoBehaviour, IProjectile
 {
-    public Elements Element { get; private set; } = Elements.Water;
+    public Elements Element { get; private set; } = Elements.Purple;
 
     public void Init(){
     }
@@ -16,5 +17,6 @@ public class WaterProjectile : MonoBehaviour, IProjectile
     }
 
     public void Reset(){
+        Destroy(this.gameObject);
     }
 }
