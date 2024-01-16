@@ -14,6 +14,7 @@ public class RuinPattern : MonoBehaviour
     public void Init(){
 
         ruinCount = enabledRuins.Count - 1;
+        Debug.LogError(ruinCount);
     }
 
     public void EnableAllRuins(){

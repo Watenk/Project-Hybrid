@@ -39,6 +39,8 @@ public class RuinPatternChargeState : BaseState<AttackManager>
 
         currentRuinPattern.DisableRuin(ruinTrigger.gameObject);
 
+        Debug.LogError(ruinTrigger.gameObject.name + " is " + currentRuinHits + ", is: " + currentRuinPattern.GetRuinCount());
+
         if (currentRuinHits >= currentRuinPattern.GetRuinCount()){
             fsm.SwitchState(typeof(RuinPatternShootState));
         }

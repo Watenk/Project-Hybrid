@@ -41,7 +41,6 @@ public class DissolvingController : MonoBehaviour
         if (VFXGraph != null)
         {
             VFXGraph.Play();
-            Debug.Log("Yuh");
         }
 
         if (meshMaterials.Length > 0)
@@ -63,7 +62,6 @@ public class DissolvingController : MonoBehaviour
 
     public void Death()
     {
-        //Activate death animation
         StartCoroutine(DissolveCo());
     }
 

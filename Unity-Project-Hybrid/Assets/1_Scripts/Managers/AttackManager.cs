@@ -127,7 +127,6 @@ public class AttackManager : IUpdateable
     //---------------------------------------------------------
 
     // Events
-
     private void OnIndexTrigger(){
         if (!active && attackcooldownTimer <= 0){
             ruinPatternFsm.SwitchState(typeof(RuinPatternSelectionState));
@@ -144,7 +143,6 @@ public class AttackManager : IUpdateable
     }
 
     // Ruins
-
     private void AddRuinPattern(Elements element, GameObject prefab){
         GameObject ruinPatternGameObject = gameObjectManager.AddGameObject(prefab);
         RuinPattern ruinPattern = GetRuinPattern(ruinPatternGameObject);

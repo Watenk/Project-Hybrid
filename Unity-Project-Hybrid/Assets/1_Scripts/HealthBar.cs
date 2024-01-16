@@ -7,15 +7,14 @@ public class HealthBar : MonoBehaviour
 {
     public GameObject healthBar;
     public float TESTFILLAMOUNT;
-    // Start is called before the first frame update
-    void Start()
-    {
+
+    //---------------------------------------
+
+    void Start(){
         SetHealthBar(.5f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         //just for testing
         SetHealthBar(TESTFILLAMOUNT);
     }

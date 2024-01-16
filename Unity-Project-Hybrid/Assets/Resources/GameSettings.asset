@@ -56,6 +56,25 @@ MonoBehaviour:
   ElementAttackCooldown: 0.5
   EnemyAttackDistance: 7
   EnemyAttackChargeDuration: 1
+  BackgroundSound: {fileID: 8300000, guid: aaded2e164bf8ed4e8420823359108b1, type: 3}
+  FireProjectileSummonSound: {fileID: 8300000, guid: 77fd37518b1b71740b01d945f8ca5507,
+    type: 3}
+  FireProjectileShootSound: {fileID: 8300000, guid: cd14fbdf3b8d16c4fb61e0d7bcd2ef29,
+    type: 3}
+  FireProjectileHitSound: {fileID: 8300000, guid: dc65d2ce522980d4baa3993bf75e10ce,
+    type: 3}
+  WaterProjectileSummonSound: {fileID: 8300000, guid: 8d57fad5de8f83741aa88493c2fd9f4c,
+    type: 3}
+  WaterProjectileShootSound: {fileID: 8300000, guid: c4c1177771dffe14eb02c766d11bc256,
+    type: 3}
+  WaterProjectileHitSound: {fileID: 8300000, guid: 4fb91120050ab7a43a8fe73c1ac05b75,
+    type: 3}
+  NatureProjectileSummonSound: {fileID: 8300000, guid: 515be51bd73679e40a5b309153ce6356,
+    type: 3}
+  NatureProjectileShootSound: {fileID: 8300000, guid: f311ddb85f09b574b8eed06c14de42a8,
+    type: 3}
+  NatureProjectileHitSound: {fileID: 8300000, guid: 9679a31d00fa1c645a9aa6d6b6aacc07,
+    type: 3}
   waves:
   - NPCAmount: 0
     EnemyAmount: 1
@@ -64,7 +83,7 @@ MonoBehaviour:
     WaterAmount: 0
     MinDistanceFromPlayer: 5
     MaxDistanceFromPlayer: 15
-    AttackChance: 100
+    AttackChance: 0
   - NPCAmount: 2
     EnemyAmount: 1
     NatureAmount: 1
