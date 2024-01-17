@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 543070378a67de04487b22bdcca1c392
+guid: 817e5a9a7ceb838438305cd73d99a747
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,53 +7,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Body
-    second: {fileID: 2100000, guid: ca6246d821840274787403348b7b2463, type: 2}
+      name: Blade
+    second: {fileID: 2100000, guid: bfc1be37e9c1f7b46a497b2ea326497a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: DarkBrown
-    second: {fileID: 2100000, guid: 615606b5b5689b34b86a0003d492d944, type: 2}
+      name: Diamond
+    second: {fileID: 2100000, guid: 3cd4646482f8ee148a7ae0f5b29b5b0b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: FlowBrown
-    second: {fileID: 2100000, guid: b3b6da3270afd0248845208a9cbc4088, type: 2}
+      name: Emission
+    second: {fileID: 2100000, guid: 3db8aa82907398d49983b93d35d4bd49, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: FlowGreen
-    second: {fileID: 2100000, guid: 347c10a5fbacb034dabdbdf73fa52ebb, type: 2}
+      name: Gold
+    second: {fileID: 2100000, guid: cdf882260c8d16b4ba3f0b695ccf2786, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Hair
-    second: {fileID: 2100000, guid: c5ab3760847134f4fb0400fdfe3ea5bd, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Leather
-    second: {fileID: 2100000, guid: 46fb7f668af5e6d468deb4f14c9c960d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Mushroom
-    second: {fileID: 2100000, guid: 6ae2262f77a816446bec0fad99c31003, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Pants
-    second: {fileID: 2100000, guid: aa4981747bdae2549b1810a242f7f6b2, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Skirt
-    second: {fileID: 2100000, guid: ac71b3651c13609469063c8dabea4598, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: UnderMushroom
-    second: {fileID: 2100000, guid: 8de00111e63dae545b211cdca207e7da, type: 2}
+      name: Handle
+    second: {fileID: 2100000, guid: 3db04e5d25e12ea47b00d142e6c2cfcc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -149,7 +124,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
