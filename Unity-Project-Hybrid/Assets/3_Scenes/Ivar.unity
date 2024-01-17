@@ -2068,6 +2068,23 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &1468468808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468468800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 277c0b7a7c1eee5428f83f41113de4c9, type: 2}
 --- !u!1 &1605777876
 GameObject:
   m_ObjectHideFlags: 0
@@ -3234,6 +3251,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1468468804}
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: 4b650a383c3760f449b65ff48bccdd5f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1468468808}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 4b650a383c3760f449b65ff48bccdd5f,
         type: 3}
       insertIndex: -1
