@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2760477736208352216}
   - component: {fileID: 3748592673137920729}
   - component: {fileID: 6615868784020136858}
+  - component: {fileID: 5082166229697786535}
   m_Layer: 8
   m_Name: FireAgent
   m_TagString: Untagged
@@ -77,6 +78,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &5082166229697786535
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023047147036141968}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.4888878
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.021659851, z: 0}
 --- !u!1001 &1372264029738153747
 PrefabInstance:
   m_ObjectHideFlags: 0

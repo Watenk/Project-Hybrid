@@ -32,14 +32,14 @@ MonoBehaviour:
     type: 3}
   FireProjectile: {fileID: 6302276805717804710, guid: ab4a4cdb3dfb3cd4cbcef48f610d7a4e,
     type: 3}
-  WaterProjectile: {fileID: 412469298062962269, guid: a867a3a0f8dceb24b8d9be65cbb4c3dc,
+  WaterProjectile: {fileID: 8266409081979630184, guid: 3ef6e053a63b40848a2b819de9c2a860,
     type: 3}
   NatureProjectile: {fileID: 1972857026914052865, guid: 94b7df05f1ac0334cbc3d31d0b4ebf8e,
     type: 3}
   EnemyProjectile: {fileID: 9220883382875874799, guid: d977f263ebef7fd4391725407400ddd7,
     type: 3}
   FireProjectileSpeed: 700
-  WaterProjectileSpeed: 700
+  WaterProjectileSpeed: 2000
   NatureProjectileSpeed: 700
   EnemyProjectileSpeed: 300
   ProjectileDistanceFromCam: 1
@@ -83,7 +83,7 @@ MonoBehaviour:
     WaterAmount: 0
     MinDistanceFromPlayer: 5
     MaxDistanceFromPlayer: 15
-    AttackChance: 0
+    AttackChance: 100
   - NPCAmount: 2
     EnemyAmount: 1
     NatureAmount: 1

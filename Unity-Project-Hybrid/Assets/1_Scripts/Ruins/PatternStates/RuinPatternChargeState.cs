@@ -15,8 +15,8 @@ public class RuinPatternChargeState : BaseState<AttackManager>
         blackboard.handTriggerDetector.OnRuinTrigger += OnRuinTrigger;
 
         currentProjectile = blackboard.GetProjectile(currentElement);
-        currentRuinPattern = blackboard.GetRuinPattern(currentElement);
         currentElement = blackboard.GetElement();
+        currentRuinPattern = blackboard.GetRuinPattern(currentElement);
         
         currentRuinHits = 0;
         blackboard.RuinPatternSetActive(currentElement, true);
@@ -38,8 +38,6 @@ public class RuinPatternChargeState : BaseState<AttackManager>
         currentRuinHits++;
 
         currentRuinPattern.DisableRuin(ruinTrigger.gameObject);
-
-        Debug.LogError(ruinTrigger.gameObject.name + " is " + currentRuinHits + ", is: " + currentRuinPattern.GetRuinCount());
 
         if (currentRuinHits >= currentRuinPattern.GetRuinCount()){
             fsm.SwitchState(typeof(RuinPatternShootState));
