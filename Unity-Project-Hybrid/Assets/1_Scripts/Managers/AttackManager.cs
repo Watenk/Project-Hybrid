@@ -110,7 +110,14 @@ public class AttackManager : IUpdateable
     public IProjectile GetProjectile(Elements element){
         projectiles.TryGetValue(element, out GameObject projectileGameObject);
         IProjectile projectile = projectileGameObject.GetComponent<IProjectile>();
-        if (projectile == null) { Debug.LogError(projectileGameObject.name + " Doesn't contain the IProjectile Interface"); }
+        if (projectile == null) { 
+        
+            projectile = projectileGameObject.GetComponentInChildren<IProjectile>();
+            
+            if (projectile == null){
+                Debug.LogError(projectileGameObject.name + " Doesn't contain the IProjectile Interface");
+            }
+        }
         return projectile;
     }
 
@@ -127,7 +134,6 @@ public class AttackManager : IUpdateable
     //---------------------------------------------------------
 
     // Events
-
     private void OnIndexTrigger(){
         if (!active && attackcooldownTimer <= 0){
             ruinPatternFsm.SwitchState(typeof(RuinPatternSelectionState));
@@ -144,7 +150,6 @@ public class AttackManager : IUpdateable
     }
 
     // Ruins
-
     private void AddRuinPattern(Elements element, GameObject prefab){
         GameObject ruinPatternGameObject = gameObjectManager.AddGameObject(prefab);
         RuinPattern ruinPattern = GetRuinPattern(ruinPatternGameObject);

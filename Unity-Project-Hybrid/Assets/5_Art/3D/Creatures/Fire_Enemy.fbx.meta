@@ -3,7 +3,42 @@ guid: fbd1edee7c213754485bccf9e7124922
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Arms.002
+    second: {fileID: 2100000, guid: 3c0488bfeef8e3343a84276ad9c130a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Body.002
+    second: {fileID: 2100000, guid: 278f28cf9401c2e4e8524600598e6f71, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Eyes.002
+    second: {fileID: 2100000, guid: 64c562f6e6aa0cd4c9e94019521b7de1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Hands.002
+    second: {fileID: 2100000, guid: 9bfc9b0ace0cd884cbc57d759da94f59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Head.002
+    second: {fileID: 2100000, guid: 42f61902e4921874489d5ecd49136d4e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Helmet.002
+    second: {fileID: 2100000, guid: 6415cbbad95ef7d4e8112c6614e24b31, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Legs.002
+    second: {fileID: 2100000, guid: d34693508b6b2a64cbc29413ef5082e8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

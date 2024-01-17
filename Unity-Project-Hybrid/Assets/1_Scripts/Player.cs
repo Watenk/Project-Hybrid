@@ -5,8 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour, IDamageable
 {
     public int Health { get; private set; }
-
     public int MaxHealth { get; private set; }
+
+    //-----------------------------------------------------
 
     public void Start(){
         MaxHealth = GameSettings.Instance.PlayerHealth;

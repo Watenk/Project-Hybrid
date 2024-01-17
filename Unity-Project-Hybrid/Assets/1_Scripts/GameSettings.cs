@@ -66,6 +66,18 @@ public class GameSettings : ScriptableObject
     public float EnemyAttackDistance;
     public float EnemyAttackChargeDuration;
 
+    [Header("Audio")]
+    public AudioClip BackgroundSound;
+    public AudioClip FireProjectileSummonSound;
+    public AudioClip FireProjectileShootSound;
+    public AudioClip FireProjectileHitSound;
+    public AudioClip WaterProjectileSummonSound;
+    public AudioClip WaterProjectileShootSound;
+    public AudioClip WaterProjectileHitSound;
+    public AudioClip NatureProjectileSummonSound;
+    public AudioClip NatureProjectileShootSound;
+    public AudioClip NatureProjectileHitSound;
+
     [Header("Waves")]
     [Tooltip("The game starts at the first wave and when all the enemy's in that wave are dead it proceeds to the next wave")]
     public List<Wave> waves = new List<Wave>();
