@@ -5,29 +5,32 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public GameObject healthBar;
-    public float TESTFILLAMOUNT;
+    public List<GameObject> healthBars = new List<GameObject>();
+
+    private GameObject activeHealthBar;
+    private Player player;
 
     //---------------------------------------
 
     void Start(){
-        SetHealthBar(.5f);
+        player = GameManager.Instance.Player.GetComponent<Player>();
+
+        foreach (GameObject healthBar in healthBars){
+            healthBar.SetActive(false);
+        }
+
+        activeHealthBar = healthBars[5];
     }
 
-    void Update(){
-        //just for testing
-        SetHealthBar(TESTFILLAMOUNT);
+    void FixedUpdate(){
+        SetHealthBar(player.Health);
     }
 
-    /// <summary>
-    /// fillAmount between 0 and 1, 0 empty, 1 full;
-    /// </summary>
-    /// <param name="fillAmount"></param>
-    public void SetHealthBar(float fillAmount) {
-        healthBar.GetComponent<Image>().fillAmount = fillAmount;
-    }
+    public void SetHealthBar(int amount) {
 
-    public void ChangeHealthBarColour(Color colorChange) {
-        healthBar.GetComponent<Image>().color = colorChange;
+        if (activeHealthBar != null){
+            activeHealthBar.SetActive(false);
+            healthBars[amount].SetActive(true);
+        }
     }
 }

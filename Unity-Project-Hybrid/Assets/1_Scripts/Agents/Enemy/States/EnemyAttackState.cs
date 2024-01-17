@@ -12,6 +12,7 @@ public class EnemyAttackState : BaseState<NPCBlackboard>
         blackboard.npc.Agent.SetDestination(GameManager.Instance.Player.transform.position);
         attackChargeDurationTimer = GameSettings.Instance.EnemyAttackChargeDuration;
         isStopped = false;
+        blackboard.animationManager.PlayWalkingAnimation(blackboard.npc.gameObject);
     }
 
     public override void OnUpdate()
@@ -26,6 +27,7 @@ public class EnemyAttackState : BaseState<NPCBlackboard>
     private void AttackPlayer(){
 
         if (!isStopped){
+            blackboard.animationManager.StopWalkingAnimation(blackboard.npc.gameObject);
             blackboard.npc.Agent.SetDestination(blackboard.npc.transform.position);
             GameManager.Instance.GetNPCAnimationManager().PlayAttackAnimation(blackboard.npc.gameObject);
         }
