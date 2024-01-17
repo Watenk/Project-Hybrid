@@ -2589,9 +2589,10 @@ MonoBehaviour:
   HandTriggerDetector: {fileID: 1858136014}
   Player: {fileID: 1468468800}
   Hand: {fileID: 1858136007}
-  MusicSource: {fileID: 0}
-  Sfx0Source: {fileID: 0}
-  Sfx1Source: {fileID: 0}
+  GameOverScreen: {fileID: 0}
+  MusicSource: {fileID: 2086701635}
+  Sfx0Source: {fileID: 1742591909}
+  Sfx1Source: {fileID: 677846884}
 --- !u!1 &1179472642
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,7 +3174,7 @@ Canvas:
   m_GameObject: {fileID: 1607530992}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1468468811}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -3313,17 +3314,17 @@ PrefabInstance:
     - target: {fileID: 8774575245272174484, guid: 75eaf117e432e7d41b96dfcb9b604083,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6379
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8774575245272174484, guid: 75eaf117e432e7d41b96dfcb9b604083,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.6379
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8774575245272174484, guid: 75eaf117e432e7d41b96dfcb9b604083,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6379
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8774575245272174484, guid: 75eaf117e432e7d41b96dfcb9b604083,
         type: 3}
@@ -3363,12 +3364,12 @@ PrefabInstance:
     - target: {fileID: 8774575245272174484, guid: 75eaf117e432e7d41b96dfcb9b604083,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -784.23
+      value: -596
       objectReference: {fileID: 0}
     - target: {fileID: 8774575245272174484, guid: 75eaf117e432e7d41b96dfcb9b604083,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 508.63
+      value: 343
       objectReference: {fileID: 0}
     - target: {fileID: 8774575245272174484, guid: 75eaf117e432e7d41b96dfcb9b604083,
         type: 3}
@@ -5230,7 +5231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2118770918
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5247,8 +5248,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0.000030518, y: 10.911}
+  m_SizeDelta: {x: 1164.119, y: 853.523}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2118770919
 MonoBehaviour:
@@ -5270,7 +5271,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f7a83d81ed9df2a46803cbf1fb3f2efc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3cfa8bc35a1bf94f86214adf117ef18, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
