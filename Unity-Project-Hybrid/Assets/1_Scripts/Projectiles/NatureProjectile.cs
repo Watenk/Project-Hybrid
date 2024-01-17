@@ -5,8 +5,7 @@ using UnityEngine;
 public class NatureProjectile : MonoBehaviour, IProjectile
 {
     public List<ParticleSystem> riseParticles;
-    public Elements Element { get; private set; }
-    public Elements ElementProjectile;
+    public Elements Element { get; private set; } = Elements.Nature;
 
     private Animator animator;
     private Rigidbody rb;
@@ -14,7 +13,6 @@ public class NatureProjectile : MonoBehaviour, IProjectile
     //--------------------------------------------------------
 
     public void Init(){
-        Element = ElementProjectile;
         animator = GetComponentInChildren<Animator>();
         if (animator == null) { Debug.LogError("NatureProjectile is missing a Animator"); } 
         animator.StopPlayback();
