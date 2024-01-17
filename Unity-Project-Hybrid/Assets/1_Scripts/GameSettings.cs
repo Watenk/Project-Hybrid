@@ -42,8 +42,12 @@ public class GameSettings : ScriptableObject
     public float FireProjectileSpeed;
     public float WaterProjectileSpeed;
     public float NatureProjectileSpeed;
+    public float EnemyProjectileSpeed;
     public float ProjectileDistanceFromCam;
     public float ShootDelay;
+
+    [Header("Player")]
+    public int PlayerHealth;
 
     [Header("Agents")]
     public float AgentMinIdleTime;
@@ -51,13 +55,16 @@ public class GameSettings : ScriptableObject
     public int AgentMinSpeed;
     public int AgentMaxSpeed;
     public int AgentHealth;
+    public int AgentDeathDuration;
 
     [Header("Element Patterns")]
+    public float ElementsHeight;
     public float ElementPatternDistanceFromCam;
     public float ElementAttackCooldown;
 
     [Header("Enemy's")]
     public float EnemyAttackDistance;
+    public float EnemyAttackChargeDuration;
 
     [Header("Waves")]
     [Tooltip("The game starts at the first wave and when all the enemy's in that wave are dead it proceeds to the next wave")]

@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class WaterProjectile : MonoBehaviour, IProjectile
 {
-    public Elements Element { get; private set; }
-    public Elements ElementProjectile;
+    public Elements Element { get; private set; } = Elements.Water;
 
     public void Init(){
-        Element = ElementProjectile;
     }
 
     public void Charge(){

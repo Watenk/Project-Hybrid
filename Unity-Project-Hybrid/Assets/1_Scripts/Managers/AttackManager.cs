@@ -8,7 +8,6 @@ public class AttackManager : IUpdateable
     private bool active;
     private float attackcooldownTimer;
     private Elements element;
-    private Vector3 previousPlayerPos;
     private FSM<AttackManager> ruinPatternFsm;
     private Dictionary<Elements, RuinPattern> ruinPatterns = new Dictionary<Elements, RuinPattern>();
     private Dictionary<Elements, GameObject> projectiles = new Dictionary<Elements, GameObject>();
@@ -160,7 +159,6 @@ public class AttackManager : IUpdateable
     }
 
     // Projectiles
-
     private void AddProjectile(Elements element, GameObject prefab){
         GameObject projectileGameObject = gameObjectManager.AddGameObject(prefab);
         projectiles.Add(element, projectileGameObject);
@@ -171,9 +169,10 @@ public class AttackManager : IUpdateable
     // Other
 
     private void SetObjectInFrontOfPlayer(GameObject currentObject, float distance){
-        currentObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * distance;
+        Vector3 newPos = Camera.main.transform.position + Camera.main.transform.forward * distance;
+        newPos.y = GameSettings.Instance.ElementsHeight;
+        currentObject.transform.position = newPos;
         currentObject.transform.LookAt(Camera.main.transform);
         currentObject.transform.eulerAngles = new Vector3(0, currentObject.transform.eulerAngles.y, currentObject.transform.eulerAngles.z);
-        previousPlayerPos = currentObject.transform.position;
     }
 }

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private NPCManager npcManager;
     private EnemyManager enemyManager;
     private InputManager inputManager;
-    private AnimationManager animationManager;
+    private NPCAnimationManager npcAnimationManager;
     private SoundManager soundManager;
     private AttackManager attackManager;
     private WaveManager waveManager;
@@ -48,8 +48,8 @@ public class GameManager : MonoBehaviour
         return waveManager;
     }
 
-    public AnimationManager GetAnimationManager(){
-        return animationManager;
+    public NPCAnimationManager GetNPCAnimationManager(){
+        return npcAnimationManager;
     }
 
     public GameObjectManager GetGameObjectManager(){
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         agentManager = new AgentManager(gameObjectManager);
         enemyManager = new EnemyManager(agentManager);
         inputManager = new InputManager();
-        animationManager = new AnimationManager();
+        npcAnimationManager = new NPCAnimationManager();
         soundManager = new SoundManager();
         attackManager = new AttackManager(gameObjectManager, HandTriggerDetector, inputManager);
         npcManager = new NPCManager(agentManager);

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class FireProjectile : MonoBehaviour, IProjectile
 {
-    public Elements ElementProjectile;
-    public Elements Element { get; private set; }
+    public Elements Element { get; private set; } = Elements.Fire;
 
     public LayerMask agentLayer;
 
@@ -13,7 +12,6 @@ public class FireProjectile : MonoBehaviour, IProjectile
     private GameObject target;
 
     public void Init(){
-        Element = ElementProjectile;
         rb = GetComponent<Rigidbody>();
         if (rb == null) { Debug.LogError("NatureProjectile is missing a RigidBody"); } 
     }
