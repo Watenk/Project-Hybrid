@@ -5,12 +5,12 @@ using UnityEngine.VFX;
 
 public class DissolvingController : MonoBehaviour
 {
-    public MeshRenderer mesh;
+    public SkinnedMeshRenderer[] mesh;
     public VisualEffect VFXGraph;
     public float dissolveRate = 0.0125f;
     public float refreshRate = 0.025f;
 
-    private Material[] meshMaterials;
+    public Material[] meshMaterials;
 
     private Color fireDissolveColor = new Color(255, 84, 25);
     private Color waterDissolveColor = new Color(138, 224, 255);
@@ -23,7 +23,7 @@ public class DissolvingController : MonoBehaviour
         material = GetComponent<Material>();
 
         if (mesh != null)
-            meshMaterials = mesh.materials;
+            meshMaterials = mesh[0].materials;
         VFXGraph.Stop();
     }
 
