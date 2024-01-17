@@ -72,7 +72,7 @@ public class Spells : MonoBehaviour
         while (timeElapsed < duration)
         {
             float t = timeElapsed / duration;
-            float size = Mathf.Lerp(0.1f, 0.5f, t);
+            float size = Mathf.Lerp(0.05f, 0.3f, t);
             currentAttack.transform.localScale = new Vector3(size, size, size);
             timeElapsed += Time.deltaTime;
 
@@ -109,20 +109,19 @@ public class Spells : MonoBehaviour
         currentAttack.transform.parent = null;
 
         Vector3 oldPos = currentAttack.transform.position;
-        
+        Vector3 velocity = Vector3.zero;
 
         float duration = 1.5f;
         float timeElapsed = 0;
-
 
         while (timeElapsed < duration)
         {
             float t = timeElapsed / duration;
 
-            Vector3 position = Vector3.Lerp(oldPos, targetPos, t);
+            Vector3 position = Vector3.SmoothDamp(targetPos, currentAttack.transform.position, ref velocity, t / 200);
             currentAttack.transform.position = position;
 
-            float size = Mathf.Lerp(0.5f, 1f, t);
+            float size = Mathf.Lerp(0.3f, 4f, t);
             currentAttack.transform.localScale = new Vector3(size, size, size);
 
             timeElapsed += Time.deltaTime;
