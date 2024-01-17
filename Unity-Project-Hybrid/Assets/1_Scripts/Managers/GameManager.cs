@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public HandTriggerDetector HandTriggerDetector;
     public GameObject Player;
     public GameObject Hand;
+    public AudioSource MusicSource;
+    public AudioSource Sfx0Source;
+    public AudioSource Sfx1Source;
 
     // Managers
     private GameObjectManager gameObjectManager;
@@ -68,6 +71,10 @@ public class GameManager : MonoBehaviour
         return enemyManager;
     }
 
+    public SoundManager GetSoundManager(){
+        return soundManager;
+    }
+
     //------------------------------------------------
 
     private void InitManagers(){
@@ -81,7 +88,7 @@ public class GameManager : MonoBehaviour
         enemyManager = new EnemyManager(agentManager);
         inputManager = new InputManager();
         npcAnimationManager = new NPCAnimationManager();
-        soundManager = new SoundManager();
+        soundManager = new SoundManager(MusicSource, Sfx0Source, Sfx1Source);
         attackManager = new AttackManager(gameObjectManager, HandTriggerDetector, inputManager);
         npcManager = new NPCManager(agentManager);
         waveManager = new WaveManager(enemyManager, npcManager);

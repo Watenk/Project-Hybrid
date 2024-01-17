@@ -16,6 +16,7 @@ public class NPC : MonoBehaviour, IDamageable
     protected float deathDurationTimer;
     
     private bool death = false;
+    private SoundManager soundManager;
 
     //------------------------------------------------
 
@@ -26,6 +27,7 @@ public class NPC : MonoBehaviour, IDamageable
         Health = MaxHealth;
         Agent = GetComponent<NavMeshAgent>();
         deathDurationTimer = GameSettings.Instance.AgentDeathDuration;
+        soundManager = GameManager.Instance.GetSoundManager();
         
         InitFSM();
 
@@ -57,16 +59,19 @@ public class NPC : MonoBehaviour, IDamageable
 
             if (Element == Elements.Water){
                 if (projectile.Element == Elements.Nature){
+                    soundManager.PlaySound(GameSettings.Instance.NatureProjectileHitSound, SoundSource.SFX0);
                     TakeDamage(1);
                 }
             }
             if (Element == Elements.Nature){
                 if (projectile.Element == Elements.Fire){
+                    soundManager.PlaySound(GameSettings.Instance.FireProjectileHitSound, SoundSource.SFX0);
                     TakeDamage(1);
                 }
             }
             if (Element == Elements.Fire){
                 if (projectile.Element == Elements.Water){
+                    soundManager.PlaySound(GameSettings.Instance.WaterProjectileHitSound, SoundSource.SFX0);
                     TakeDamage(1);
                 }
             }

@@ -14,9 +14,9 @@ public class RuinPatternChargeState : BaseState<AttackManager>
     public override void OnStart(){
         blackboard.handTriggerDetector.OnRuinTrigger += OnRuinTrigger;
 
-        currentProjectile = blackboard.GetProjectile(currentElement);
         currentElement = blackboard.GetElement();
         currentRuinPattern = blackboard.GetRuinPattern(currentElement);
+        currentProjectile = blackboard.GetProjectile(currentElement);
         
         currentRuinHits = 0;
         blackboard.RuinPatternSetActive(currentElement, true);

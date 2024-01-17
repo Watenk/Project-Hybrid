@@ -78,12 +78,12 @@ MonoBehaviour:
   waves:
   - NPCAmount: 0
     EnemyAmount: 1
-    NatureAmount: 0
-    FireAmount: 1
+    NatureAmount: 1
+    FireAmount: 0
     WaterAmount: 0
     MinDistanceFromPlayer: 5
     MaxDistanceFromPlayer: 15
-    AttackChance: 100
+    AttackChance: 0
   - NPCAmount: 2
     EnemyAmount: 1
     NatureAmount: 1

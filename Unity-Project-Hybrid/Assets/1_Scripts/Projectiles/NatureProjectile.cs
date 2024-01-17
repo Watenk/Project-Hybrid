@@ -9,6 +9,7 @@ public class NatureProjectile : MonoBehaviour, IProjectile
 
     private Animator animator;
     private Rigidbody rb;
+    private SoundManager soundManager;
 
     //--------------------------------------------------------
 
@@ -18,15 +19,18 @@ public class NatureProjectile : MonoBehaviour, IProjectile
         animator.StopPlayback();
         rb = GetComponent<Rigidbody>();
         if (rb == null) { Debug.LogError("NatureProjectile is missing a RigidBody"); } 
+        soundManager = GameManager.Instance.GetSoundManager();
     }
 
     public void Charge()
     {
+        soundManager.PlaySound(GameSettings.Instance.NatureProjectileSummonSound, SoundSource.SFX1);
         PlayRisingAnimation();
     }
 
     public void Shoot()
     {
+        soundManager.PlaySound(GameSettings.Instance.NatureProjectileShootSound, SoundSource.SFX1);
         PlayShootAnimation();
     }
 

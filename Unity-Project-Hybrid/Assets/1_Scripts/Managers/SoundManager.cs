@@ -10,46 +10,34 @@ public enum SoundSource{
 
 public class SoundManager
 {
-    public static SoundManager Instance { get; private set; }
+    private AudioSource musicSource;
+    private AudioSource sfxSource0;
+    private AudioSource sfxSource1;
 
-    public AudioSource MusicSource;
-    public AudioSource SfxSource0;
-    public AudioSource SfxSource1;
-
-    public void Awake(){
-        Instance = this;
+    public SoundManager(AudioSource musicSource, AudioSource sfxSource0, AudioSource sfxSource1){
+        this.musicSource = musicSource;
+        this.sfxSource0 = sfxSource0;
+        this.sfxSource1 = sfxSource1;
     }
 
     public void PlaySound(AudioClip audioClip, SoundSource source){
 
         if (source == SoundSource.Music){
-            if (!MusicSource.isPlaying){
-                MusicSource.clip = audioClip;
-                MusicSource.Play();
-            }
-            else{
-                Debug.LogWarning("MusicSource Audio busy");
-            }
+
+            musicSource.clip = audioClip;
+            musicSource.Play();
         }
 
         if (source == SoundSource.SFX0){
-            if (!SfxSource0.isPlaying){
-                SfxSource0.clip = audioClip;
-                SfxSource0.Play();
-            }
-            else{
-                Debug.LogWarning("SfxSource0 Audio busy");
-            }
+
+            sfxSource0.clip = audioClip;
+            sfxSource0.Play();
         }
 
         if (source == SoundSource.SFX1){
-            if (!SfxSource1.isPlaying){
-                SfxSource1.clip = audioClip;
-                SfxSource1.Play();
-            }
-            else{
-                Debug.LogWarning("SfxSource1 Audio busy");
-            }
+
+            sfxSource1.clip = audioClip;
+            sfxSource1.Play();
         }
     }
 }

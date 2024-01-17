@@ -11,6 +11,7 @@ public class WaterProjectile : MonoBehaviour, IProjectile
     private float waterbeamTimer;
     private bool shot;
     private GameObject waterbeamInstance;
+    private SoundManager soundManager;
 
     public void FixedUpdate(){
         if (shot == true){
@@ -25,12 +26,15 @@ public class WaterProjectile : MonoBehaviour, IProjectile
     public void Init(){
         rb = GetComponent<Rigidbody>();
         if (rb == null) { Debug.LogError(this.name + " Doesn't contain a rigidbody"); }
+        soundManager = GameManager.Instance.GetSoundManager();
     }
 
     public void Charge(){
+        soundManager.PlaySound(GameSettings.Instance.WaterProjectileSummonSound, SoundSource.SFX1);
     }
 
     public void Shoot(){
+        soundManager.PlaySound(GameSettings.Instance.WaterProjectileShootSound, SoundSource.SFX1);
         waterbeamTimer = 2.5f;
         shot = true;
         waterbeamInstance = Instantiate(waterbeamPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation);
