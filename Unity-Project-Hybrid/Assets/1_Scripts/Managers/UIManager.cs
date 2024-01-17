@@ -14,6 +14,6 @@ public class UIManager : MonoBehaviour
     }
 
     public void FixedUpdate(){
-        //healthSlider.SetHealthBar(0.5f);
+        healthSlider.SetHealthBar(player.Health);
     }
 }

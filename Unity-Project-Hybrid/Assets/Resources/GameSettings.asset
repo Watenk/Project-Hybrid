@@ -44,7 +44,7 @@ MonoBehaviour:
   EnemyProjectileSpeed: 300
   ProjectileDistanceFromCam: 1
   ShootDelay: 1
-  PlayerHealth: 1
+  PlayerHealth: 5
   AgentMinIdleTime: 1
   AgentMaxIdleTime: 5
   AgentMinSpeed: 2
@@ -54,7 +54,7 @@ MonoBehaviour:
   ElementsHeight: 1.3
   ElementPatternDistanceFromCam: 0.5
   ElementAttackCooldown: 0.5
-  EnemyAttackDistance: 7
+  EnemyAttackDistance: 10
   EnemyAttackChargeDuration: 1
   BackgroundSound: {fileID: 8300000, guid: aaded2e164bf8ed4e8420823359108b1, type: 3}
   FireProjectileSummonSound: {fileID: 8300000, guid: 77fd37518b1b71740b01d945f8ca5507,
@@ -78,8 +78,8 @@ MonoBehaviour:
   waves:
   - NPCAmount: 0
     EnemyAmount: 1
-    NatureAmount: 0
-    FireAmount: 1
+    NatureAmount: 1
+    FireAmount: 0
     WaterAmount: 0
     MinDistanceFromPlayer: 5
     MaxDistanceFromPlayer: 15

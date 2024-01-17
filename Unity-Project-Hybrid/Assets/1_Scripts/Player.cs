@@ -42,7 +42,6 @@ public class Player : MonoBehaviour, IDamageable
     }
 
     public void Die(){
-        // ...Game-Over...
-        Debug.LogWarning("GameOver");
+        GameManager.Instance.GameOver();
     }
 }

@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     public HandTriggerDetector HandTriggerDetector;
     public GameObject Player;
     public GameObject Hand;
+    public GameObject GameOverScreen;
+    public AudioSource MusicSource;
+    public AudioSource Sfx0Source;
+    public AudioSource Sfx1Source;
 
     // Managers
     private GameObjectManager gameObjectManager;
@@ -23,6 +27,8 @@ public class GameManager : MonoBehaviour
     private AttackManager attackManager;
     private WaveManager waveManager;
 
+    private bool gameOver;
+
     //------------------------------------------------
 
     public void Awake(){
@@ -32,17 +38,30 @@ public class GameManager : MonoBehaviour
     public void Start(){
         InitManagers();
 
+        gameOver = false;
         waveManager.StartWave(0);
     }
 
     public void Update(){
-        inputManager.OnUpdate();
-        attackManager.OnUpdate();
+        if (!gameOver){
+            inputManager.OnUpdate();
+            attackManager.OnUpdate();
 
-        if (enemyManager.GetEnemyCount() == 0){
-            waveManager.StartNextWave();
+            if (enemyManager.GetEnemyCount() == 0){
+                waveManager.StartNextWave();
+            }
         }
     }
+
+    public void GameOver(){
+        gameOver = true;
+        enemyManager.ClearEnemys();
+        npcManager.ClearNPCs();
+        GameOverScreen.SetActive(true);
+    }
+
+    // Getters
+    //--------------------------------------------
 
     public WaveManager GetWaveManager(){
         return waveManager;
@@ -68,6 +87,10 @@ public class GameManager : MonoBehaviour
         return enemyManager;
     }
 
+    public SoundManager GetSoundManager(){
+        return soundManager;
+    }
+
     //------------------------------------------------
 
     private void InitManagers(){
@@ -81,7 +104,7 @@ public class GameManager : MonoBehaviour
         enemyManager = new EnemyManager(agentManager);
         inputManager = new InputManager();
         npcAnimationManager = new NPCAnimationManager();
-        soundManager = new SoundManager();
+        soundManager = new SoundManager(MusicSource, Sfx0Source, Sfx1Source);
         attackManager = new AttackManager(gameObjectManager, HandTriggerDetector, inputManager);
         npcManager = new NPCManager(agentManager);
         waveManager = new WaveManager(enemyManager, npcManager);
